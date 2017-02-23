@@ -9,7 +9,4 @@ addons:
         packages: 
             -oracle-java8-installer
 
-before_install:
-      - sudo apt-get update
-
 #adding for push
