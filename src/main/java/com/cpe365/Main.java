@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -45,7 +46,7 @@ public class Main extends Application {
     final TextField username = new TextField();
     username.setPromptText("Username");
     name.setStyle("" + "-fx-font-size: 30px;" + "-fx-font-family: Cambria;");
-    
+
     final TextField password = new TextField();
     password.setPromptText("Password");
   
@@ -100,9 +101,19 @@ public class Main extends Application {
         }
       }
     });
-    
+    /* TESTING MANAGE EMPLOYEES -------------*/
+    Button testEmp = new Button("Test Manage Employees");
+    testEmp.setOnAction(new EventHandler<ActionEvent>()  {
+      @Override
+      public void handle(ActionEvent e) {
+        manageEmployees(primaryStage);
+      }
+    });
+    /* -------------*/
+
     textfields.setAlignment(Pos.CENTER);
     sp.getChildren().add(textfields);
+    sp.getChildren().add(testEmp);
     sp.setStyle("-fx-background-color : #e1e1e5;");
     primaryStage.setScene(new Scene(sp, 800, 800));
     primaryStage.show();
@@ -115,7 +126,23 @@ public class Main extends Application {
   }
   
   public void manageEmployees(Stage primaryStage) {
+//    menuBar(primaryStage);
+    primaryStage.setTitle("Manage Employees");
+
+    VBox employeeList = new VBox(5); //sets spacing
+    Label emp1 = new Label("John Smith");
+    Label emp2 = new Label("Jane Smith");
+    Label emp3 = new Label("Kim Tan");
+    employeeList.getChildren().addAll(emp1, emp2, emp3);
+    employeeList.setAlignment(Pos.CENTER);
+    Button addEmp = new Button("Add Employee");
+    BorderPane layout = new BorderPane();
+    layout.setCenter(employeeList);
+    layout.setBottom(addEmp);
+    BorderPane.setAlignment(addEmp, Pos.CENTER);
     
+    primaryStage.setScene(new Scene(layout, 800, 800));
+    primaryStage.show();
   }
   
   public static void main(String[] args) {
