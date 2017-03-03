@@ -15,7 +15,7 @@ public class Authentication {
   
   public boolean login(String username, String password) throws ClassNotFoundException, SQLException {
     boolean login;
-    Connection conn =null;
+    Connection conn = null;
     // USER
     String dbuser = "checkyodata";
     String dbpassw = "stancheV365";
@@ -32,6 +32,7 @@ public class Authentication {
       e.printStackTrace();
     }
 
+  
     PreparedStatement ps = conn.prepareStatement("SELECT `customer_name`, `customer_password` FROM `customer` WHERE `customer_name` = ? AND `customer_password` = ?");
 
     ps.setString(1, dbuser);
