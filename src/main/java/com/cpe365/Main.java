@@ -95,20 +95,10 @@ public class Main extends Application {
         }
       }
     });
-    /* TESTING MANAGE EMPLOYEES -------------*/
-    Button testEmp = new Button("Test Manage Employees");
-    testEmp.setOnAction(new EventHandler<ActionEvent>()  {
-      @Override
-      public void handle(ActionEvent e) {
-        manageEmployees(primaryStage);
-      }
-    });
-    /* -------------*/
 
     textfields.setAlignment(Pos.CENTER);
     sp.getChildren().add(bp);
     sp.getChildren().add(textfields);
-    sp.getChildren().add(testEmp);
     sp.setStyle("-fx-background-color : #e1e1e5;");
     primaryStage.setScene(new Scene(sp, 800, 800));
     primaryStage.show();
