@@ -116,7 +116,7 @@ public class Main extends Application {
     HBox buttons = new HBox(10);
     buttons.setAlignment(Pos.CENTER);
     
-    Button memberMan = new Button("Member Management");
+    Button memberMan = new Button("Employee Management");
     Button classMan = new Button("Class Management");
     Button inventoryMan = new Button("Inventory Management");
 
@@ -166,6 +166,20 @@ public class Main extends Application {
   public void manageEmployees(Stage primaryStage) {
 //    menuBar(primaryStage);
     primaryStage.setTitle("Manage Employees");
+    BorderPane layout = new BorderPane();
+    //MenuBar
+//    layout.setTop(menuBar());
+
+//    Back Button
+    Button backBtn = new Button("Back");
+    layout.setTop(backBtn);
+
+    backBtn.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        homeScreen(primaryStage);
+      }
+    });
 
     VBox employeeList = new VBox(5); //sets spacing
     Label emp1 = new Label("John Smith");
@@ -174,7 +188,6 @@ public class Main extends Application {
     employeeList.getChildren().addAll(emp1, emp2, emp3);
     employeeList.setAlignment(Pos.CENTER);
     Button addEmp = new Button("Add Employee");
-    BorderPane layout = new BorderPane();
     layout.setCenter(employeeList);
     layout.setBottom(addEmp);
     BorderPane.setAlignment(addEmp, Pos.CENTER);
@@ -184,7 +197,32 @@ public class Main extends Application {
   }
   
   public void manageClasses(Stage primaryStage) {
-    
+
+    primaryStage.setTitle("Manage Classes");
+    BorderPane layout = new BorderPane();
+    Button backBtn = new Button("Back");
+    //add back button
+    layout.setTop(backBtn);
+
+    backBtn.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        homeScreen(primaryStage);
+      }
+    });
+    VBox classList = new VBox(5); //sets spacing
+    Label c1 = new Label("Spin");
+    Label c2 = new Label("Body Pump");
+    Label c3 = new Label("Yoga");
+    classList.getChildren().addAll(c1, c2, c3);
+    classList.setAlignment(Pos.CENTER);
+    Button addClasses = new Button("Add Class");
+    layout.setCenter(classList);
+    layout.setBottom(addClasses);
+    BorderPane.setAlignment(addClasses, Pos.CENTER);
+
+    primaryStage.setScene(new Scene(layout, 800, 800));
+    primaryStage.show();
   }
   
   public void manageInventory(Stage primaryStage) {
@@ -207,11 +245,29 @@ public class Main extends Application {
     equipmentList.getChildren().addAll(e1, e2, e3);
     equipmentList.setAlignment(Pos.CENTER);
     Button addEquipment = new Button("Add Equipment");
+    addEquipment.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        addInventory(primaryStage);
+      }
+    });
     layout.setCenter(equipmentList);
     layout.setBottom(addEquipment);
     BorderPane.setAlignment(addEquipment, Pos.CENTER);
 
     primaryStage.setScene(new Scene(layout, 800, 800));
+    primaryStage.show();
+
+  }
+
+  public void addInventory(Stage primaryStage) {
+    primaryStage.setTitle("Add New Equipment");
+    TextField textField = new TextField ();
+    Label label1 = new Label("Inventory Name");
+    HBox hb = new HBox();
+    hb.getChildren().addAll(label1, textField);
+    hb.setSpacing(10);
+    primaryStage.setScene(new Scene(hb, 800, 800));
     primaryStage.show();
 
   }
