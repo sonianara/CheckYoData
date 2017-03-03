@@ -1,7 +1,6 @@
 package com.cpe365;
 
 import java.sql.SQLException;
-
 import javafx.application.Application;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -17,7 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -32,9 +33,8 @@ public class Main extends Application {
   Authentication auth = new Authentication();
   
   public void start(final Stage primaryStage) {
+    BorderPane bp = new BorderPane();
     Label name = new Label("Meathead Manager");
-    Hyperlink createAcct = new Hyperlink();
-    createAcct.setText("Create Account");
     name.setPadding(new Insets(0, 0, 50, 0));
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setContentText("Incorrect Username and Password");
@@ -51,16 +51,11 @@ public class Main extends Application {
   
     VBox.setMargin(username, new Insets(0, 100, 10, 100));
     VBox.setMargin(password, new Insets(0, 100, 10, 100));
-
-    textfields.getChildren().addAll(name, username, password, loginBtn, createAcct);
-
-    createAcct.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent e) {
-          accountForm(primaryStage);
-      }
-    });
     
+    textfields.getChildren().addAll(name, username, password, loginBtn);
+
+    bp.setCenter(textfields);
+  
     BooleanBinding bb = new BooleanBinding() {
       {
         super.bind(username.textProperty(), password.textProperty());
@@ -86,7 +81,7 @@ public class Main extends Application {
       public void handle(ActionEvent event) {
         try {
           if (auth.login(username.getText(), password.getText())) {
-            manageEmployees(primaryStage);
+            homeScreen(primaryStage);
           }
           else {
             alert.showAndWait();
@@ -102,7 +97,7 @@ public class Main extends Application {
     });
     
     textfields.setAlignment(Pos.CENTER);
-    sp.getChildren().add(textfields);
+    sp.getChildren().add(bp);
     sp.setStyle("-fx-background-color : #e1e1e5;");
     primaryStage.setScene(new Scene(sp, 800, 800));
     primaryStage.show();
@@ -114,7 +109,68 @@ public class Main extends Application {
     
   }
   
+  public void homeScreen(Stage primaryStage) {
+    BorderPane bp = new BorderPane();
+    bp.setTop(menuBar());
+    HBox buttons = new HBox(10);
+    buttons.setAlignment(Pos.CENTER);
+    
+    Button memberMan = new Button("Member Management");
+    Button classMan = new Button("Class Management");
+    Button inventoryMan = new Button("Inventory Management");
+
+    memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+    classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+    inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+
+    buttons.getChildren().addAll(memberMan, classMan, inventoryMan);
+    
+    memberMan.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        manageEmployees(primaryStage);
+      }
+    });
+    
+    classMan.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        manageClasses(primaryStage);
+      }
+    });
+    
+    inventoryMan.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        manageInventory(primaryStage);
+      }
+    });
+    
+    bp.setCenter(buttons);
+    
+    primaryStage.setScene(new Scene(bp, 800, 800));
+    primaryStage.show();
+ 
+  }
+  
+  public HBox menuBar() {
+    Hyperlink home = new Hyperlink("Home");
+    Hyperlink pricing = new Hyperlink("Pricing");
+    Hyperlink contact = new Hyperlink("Contact");
+    HBox items = new HBox();
+    items.getChildren().addAll(home, pricing, contact);
+    return items;
+  }
+  
   public void manageEmployees(Stage primaryStage) {
+    
+  }
+  
+  public void manageClasses(Stage primaryStage) {
+    
+  }
+  
+  public void manageInventory(Stage primaryStage) {
     
   }
   
