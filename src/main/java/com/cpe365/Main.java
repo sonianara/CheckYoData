@@ -188,7 +188,32 @@ public class Main extends Application {
   }
   
   public void manageInventory(Stage primaryStage) {
-    
+    primaryStage.setTitle("Manage Inventory");
+    BorderPane layout = new BorderPane();
+    Button backBtn = new Button("Back");
+    //add back button
+    layout.setTop(backBtn);
+
+    backBtn.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        homeScreen(primaryStage);
+      }
+    });
+    VBox equipmentList = new VBox(5); //sets spacing
+    Label e1 = new Label("Treadmill");
+    Label e2 = new Label("Elliptical");
+    Label e3 = new Label("Squat Rack");
+    equipmentList.getChildren().addAll(e1, e2, e3);
+    equipmentList.setAlignment(Pos.CENTER);
+    Button addEquipment = new Button("Add Equipment");
+    layout.setCenter(equipmentList);
+    layout.setBottom(addEquipment);
+    BorderPane.setAlignment(addEquipment, Pos.CENTER);
+
+    primaryStage.setScene(new Scene(layout, 800, 800));
+    primaryStage.show();
+
   }
   
   public static void main(String[] args) {
