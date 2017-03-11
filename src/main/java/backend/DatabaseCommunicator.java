@@ -1,4 +1,4 @@
-package core.database;
+package backend;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
