@@ -49,6 +49,25 @@ public class DatabaseCommunicator
 		return result;
 	}
 	
+	private static void databaseAction(String action)
+	{
+		Connection connection = null;
+		Statement stmt = null;
+		
+		connection = connect();
+		if(connection != null)
+		{
+			try {
+			stmt = (Statement) connection.createStatement();
+			stmt.executeUpdate(action);
+			stmt.close();
+			connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	private static Connection connect()
 	{
 		Connection connection = null;
