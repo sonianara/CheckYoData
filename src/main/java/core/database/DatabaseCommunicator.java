@@ -48,4 +48,23 @@ public class DatabaseCommunicator
 		}
 		return result;
 	}
+	
+	private static Connection connect()
+	{
+		Connection connection = null;
+		
+		String url = "jdbc:mysql://checkyodata.cqxvubssbsqb.us-west-2.rds.amazonaws.com:3306/";
+		String userName = "admin";
+		// SUPER NOT SECURE OR ANYTHING
+		String password = "stancheV365";
+		String dbName = "CheckYoData";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = (Connection) DriverManager.getConnection(url + dbName, userName, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return connection;
+	}
 }

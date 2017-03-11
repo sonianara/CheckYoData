@@ -1,4 +1,4 @@
-package com.cpe365;
+package frontend;
 
 import java.sql.SQLException;
 import javafx.application.Application;
