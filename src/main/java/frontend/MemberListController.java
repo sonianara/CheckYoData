@@ -15,6 +15,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage; 
 
+/**
+ * Class to manage the members in the system.
+ * Supports viewing, adding, editing, and deleting members
+ * @author cbrown
+ *
+ */
 public class MemberListController {
 	@FXML private VBox memberContainer; 
 	@FXML private Button newMemberButton; 
@@ -26,13 +32,18 @@ public class MemberListController {
 		populateMembers(); 
 	}
 	
+	/**
+	 * Method to populate the member list with database table
+	 */
 	private void populateMembers() {
-		System.out.println("populating");
 		// populate member list from back end
+		
+		//SAMPLE DATA ONLY
 		Member mem1 = new Member("Courtney", "Brown", "cbrown83@calpoly.edu", "4256818114", "2909 233rd Ave SE", "Sammamish", "WA", 98075, "rec", true); 
 		Member mem2 = new Member("Brandon", "Leon", "brleon@calpoly.edu", "8182319169", "7357 Genesta Ave", "Van Nuys", "CA", 91406, "rec", true); 
 		members.add(mem1); 
 		members.add(mem2); 
+		// TODO(Courtney) Remove once hooked up to backend 
 		
 		memberContainer.getChildren().clear();
 
@@ -44,6 +55,11 @@ public class MemberListController {
 		
 	}
 	
+	/**
+	 * Method to add the labels to the member container
+	 * Format: 
+	 * LAST NAME		FIRST NAME		PHONE NUMBER		MEMBER TYPE
+	 */
 	private void addLabelsToContainer() {
 		Pane newPane = null;
 		
@@ -59,6 +75,10 @@ public class MemberListController {
 		newPane.getChildren().remove(newPane.lookup("#editButton"));
 	}
 
+	/**
+	 * Method to add members to the member container
+	 * @param member one member from the list of members acquired from the database
+	 */
 	private void addMemberToContainer(Member member) {
 		// create a new "pane"
 		Pane newPane = null;
@@ -90,6 +110,11 @@ public class MemberListController {
 		memberType.setText(member.getMemberType());
 	}
 	
+	/**
+	 * Method to open a new member form upon clicking the "Add Member" button
+	 * @param event necessary for onClick action
+	 * @throws IOException
+	 */
 	@FXML
 	public void addMemberButtonClick(ActionEvent event) throws IOException {
 		String fxmlFile = "NewMemberForm.fxml"; 

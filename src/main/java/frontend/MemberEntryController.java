@@ -12,6 +12,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Class to handle each member for use in the MemberListView
+ * Enables the edit button per each member
+ * @author cbrown
+ *
+ */
 public class MemberEntryController {
 	Member member; 
 	MemberListController memberListController; 
@@ -22,6 +28,10 @@ public class MemberEntryController {
 	@FXML private Label memberType; 
 	@FXML private Button editButton; 
 	
+	/**
+	 * Method to inform the EditMemberController which member it is editing
+	 * @param event necessary for javafx onClick action
+	 */
 	@FXML
     private void editAction(ActionEvent event) {	
 		Stage stage = new Stage();
@@ -33,8 +43,8 @@ public class MemberEntryController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}          
-		//TODO update this function 
 		// Sets values so the ResourceEntryController knows which course it contains.
+		// TODO(Courtney) might want to change to fetch the database member then just pass that
 		EditMemberController memberController = fxmlLoader.<EditMemberController>getController();
 		memberController.setFirstName(member.getFirstName());
 		memberController.setLastName(member.getLastName());

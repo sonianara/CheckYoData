@@ -12,6 +12,11 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
+/**
+ * Class to manage changes to member information
+ * @author cbrown
+ *
+ */
 public class EditMemberController {
 	@FXML private TextField firstName; 
 	@FXML private TextField lastName; 
@@ -42,10 +47,18 @@ public class EditMemberController {
 		populateFields(); 
 	}
 	
+	/** 
+	 * Method to auto-fill the fields in the edit member template
+	 * Uses the member passed in from the MemberEntryController
+	 */
 	private void populateFields() {
 		//TODO fill this in
 	}
 
+	/**
+	 * Method to update the member's information in the database and system
+	 * @param event necessary for javafx onAction
+	 */
 	@FXML
 	public void saveMember(ActionEvent event) {
 		//TODO Fill this in
@@ -54,6 +67,10 @@ public class EditMemberController {
 		// add the updated member
 	}
 	
+	/**
+	 * Method to remove the member from the database and system
+	 * @param event necessary for javafx onAction
+	 */
 	@FXML
 	public void deleteMember(ActionEvent event) {
 		//TODO fill this in

@@ -157,6 +157,7 @@ public class Main extends Application {
     	@Override
     	public void handle(ActionEvent event) {
     		try {
+    			// Open the member list
     	    	String fxmlFile = "MemberListView.fxml"; 
     	    	Stage stage = new Stage(); 
     	    	Pane myPane = null; 
