@@ -10,14 +10,13 @@ public class Member implements DatabaseObject {
 	private String state; 
 	private int zipCode;
 	private String memberType; 
-	private boolean isActive; 
 	
 	public Member() {
 		
 	}
 
 	public Member(String firstName, String lastName, String email, String phoneNumber, String address, String city,
-			String state, int zipCode, String memberType, boolean isActive) {
+			String state, int zipCode, String memberType) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -28,7 +27,6 @@ public class Member implements DatabaseObject {
 		this.state = state;
 		this.zipCode = zipCode;
 		this.memberType = memberType;
-		this.isActive = isActive;
 	}
 
 	public String getFirstName() {
@@ -103,24 +101,16 @@ public class Member implements DatabaseObject {
 		this.memberType = memberType;
 	}
 
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
-
 	@Override
 	public String getKeys() {
-		return "email, first_name, last_name, phone_number, address, city, state, zip_code, member_type, is_active";
+		return "email, first_name, last_name, phone_number, address, city, state, zip_code, member_type, password";
 	}
 
 	@Override
 	public String getValues() {
 		return "'" + email + "', '" + this.firstName + "', '" + this.lastName + "', '" + this.phoneNumber + "', '" +
 				this.address + "', '" + this.city + "', '" + this.state + "', " + this.zipCode + ", '" + this.memberType + 
-				"', '" + this.isActive + "'";
+				"', '" + this.phoneNumber + "'";
 	}
 
 	@Override

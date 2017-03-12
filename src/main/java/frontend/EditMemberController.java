@@ -3,6 +3,7 @@ package frontend;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import backend.DatabaseCommunicator;
 import backend.Member;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * Class to manage changes to member information
@@ -18,20 +20,19 @@ import javafx.scene.control.TextField;
  *
  */
 public class EditMemberController {
-	@FXML private TextField firstName; 
-	@FXML private TextField lastName; 
-	@FXML private TextField email; 
-	@FXML private TextField phoneNumber; 
-	@FXML private TextField address; 
-	@FXML private TextField city; 
-	@FXML private ComboBox state; 
-	@FXML private TextField zipCode; 
+	@FXML private TextField firstNameText; 
+	@FXML private TextField lastNameText; 
+	@FXML private TextField emailText; 
+	@FXML private TextField phoneNumberText; 
+	@FXML private TextField addressText; 
+	@FXML private TextField cityText; 
+	@FXML private ComboBox stateBox; 
+	@FXML private TextField zipCodeText; 
 	@FXML private Button saveButton; 
 	@FXML private Button deleteButton; 
-	@FXML private CheckBox isActive; 
 	
 	
-	private Member member = new Member(); 
+	private Member member; 
 	private MemberListController controller; 
 
 	@FXML
@@ -42,17 +43,23 @@ public class EditMemberController {
 				"MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", 
 				"OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA",
 				"WI","WV","WY")); 
-		state.setItems(FXCollections.observableArrayList(states)); 
+		stateBox.setItems(FXCollections.observableArrayList(states)); 
 
-		populateFields(); 
 	}
 	
 	/** 
 	 * Method to auto-fill the fields in the edit member template
 	 * Uses the member passed in from the MemberEntryController
 	 */
-	private void populateFields() {
-		//TODO fill this in
+	public void populateFields() {
+		firstNameText.setText(member.getFirstName());
+		lastNameText.setText(member.getLastName());
+		emailText.setText(member.getEmail());
+		phoneNumberText.setText(member.getPhoneNumber());
+		addressText.setText(member.getAddress());
+		cityText.setText(member.getCity());
+		stateBox.setValue(member.getState());
+		zipCodeText.setText(Integer.toString(member.getZipCode()));
 	}
 
 	/**
@@ -61,10 +68,27 @@ public class EditMemberController {
 	 */
 	@FXML
 	public void saveMember(ActionEvent event) {
-		//TODO Fill this in
-		Member updatedMember = new Member(); 
-		// delete member from database
-		// add the updated member
+		String firstName = firstNameText.getText();  
+		String lastName = lastNameText.getText(); 
+		String email = emailText.getText();
+		String phoneNumber = phoneNumberText.getText();
+		String address = addressText.getText();
+		String city = cityText.getText(); 
+		String state = stateBox.getValue().toString();
+		int zipCode = Integer.parseInt(zipCodeText.getText()); 
+		String memberType = "active"; 		
+		
+		Member updatedMember = new Member(firstName, lastName, email, phoneNumber, address, city, state, zipCode, memberType); 
+
+		DatabaseCommunicator.getInstance(); 
+		DatabaseCommunicator.replaceDatabase(updatedMember);
+
+		// update member list view
+		controller.populateMembers();
+		
+		// close the new member form
+		Stage currentStage = (Stage) saveButton.getScene().getWindow();
+		currentStage.close();
 	}
 	
 	/**
@@ -74,25 +98,15 @@ public class EditMemberController {
 	@FXML
 	public void deleteMember(ActionEvent event) {
 		//TODO fill this in
+		// update member list view
+		controller.populateMembers();
 
 	}
 	
-	public void setFirstName(String firstName) {
-		this.member.setFirstName(firstName); 
-	}
-	
-	public void setLastName(String lastName) {
-		this.member.setLastName(lastName);
+	public void setMember(Member member) {
+		this.member = member; 
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.member.setPhoneNumber(phoneNumber);
-	}
-	
-	public void setMemberType(String memberType) {
-		this.member.setMemberType(memberType);
-	}
-	
 	public void setController(MemberListController controller) {
 		this.controller = controller; 
 	}

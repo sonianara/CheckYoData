@@ -2,10 +2,12 @@ package frontend;
 
 import java.io.IOException;
 
+import backend.DatabaseCommunicator;
 import backend.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane; 
 import javafx.scene.control.Button; 
 import javafx.scene.control.Label; 
 import javafx.scene.Parent;
@@ -33,26 +35,23 @@ public class MemberEntryController {
 	 * @param event necessary for javafx onClick action
 	 */
 	@FXML
-    private void editAction(ActionEvent event) {	
+    private void editAction(ActionEvent event) throws IOException {	
 		Stage stage = new Stage();
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditMemberForm.fxml"));     
+    	Pane myPane = null; 
 
-    	Parent root = null;
-		try {
-			root = (Parent)fxmlLoader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}          
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditMemberForm.fxml"));     
+		myPane = (Pane)fxmlLoader.load();
+
 		// Sets values so the ResourceEntryController knows which course it contains.
-		// TODO(Courtney) might want to change to fetch the database member then just pass that
-		EditMemberController memberController = fxmlLoader.<EditMemberController>getController();
-		memberController.setFirstName(member.getFirstName());
-		memberController.setLastName(member.getLastName());
-		memberController.setPhoneNumber(member.getPhoneNumber());
-		memberController.setMemberType(member.getMemberType());
-		memberController.setController(memberListController);
-    	
-		Scene scene = new Scene(root); 
+		EditMemberController editMemberController = fxmlLoader.<EditMemberController>getController();
+		DatabaseCommunicator.getInstance(); 
+		editMemberController.setMember(DatabaseCommunicator.getMember(phoneNumber.getText())); 
+		editMemberController.setController(memberListController);
+
+		
+		editMemberController.populateFields();
+	
+		Scene scene = new Scene(myPane); 
     	stage.setScene(scene);    
     	stage.show();   
 	}

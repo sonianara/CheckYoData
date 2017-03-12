@@ -60,6 +60,20 @@ public class DatabaseCommunicator
 		databaseUpdate(update);
 	}
 	
+	public static Member getMember(String phoneNumber) {
+		HashMap<String, Object> row = queryDatabase("SELECT * FROM members WHERE phone_number='" + phoneNumber + "';").get(0); 
+		String firstName = row.get("first_name").toString();
+		String lastName = row.get("last_name").toString(); 
+		String email = row.get("email").toString(); 
+		String address = row.get("address").toString();
+		String city = row.get("city").toString(); 
+		String state = row.get("state").toString();
+		int zipCode = Integer.parseInt(row.get("zip_code").toString()); 
+		String memberType = row.get("member_type").toString(); 
+
+		Member member = new Member(firstName, lastName, email, phoneNumber, address, city, state, zipCode, memberType); 
+		return member; 
+	}
 	/**
 	 * Method to query the database for some information 
 	 * Note the keys from the returned HashMaps are the table column names

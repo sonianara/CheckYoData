@@ -2,12 +2,15 @@ package frontend;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import backend.DatabaseCommunicator;
 import backend.Member;
-import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,15 +39,8 @@ public class MemberListController {
 	/**
 	 * Method to populate the member list with database table
 	 */
-	private void populateMembers() {
-		// populate member list from back end
-		
-		//SAMPLE DATA ONLY
-		Member mem1 = new Member("Courtney", "Brown", "cbrown83@calpoly.edu", "4256818114", "2909 233rd Ave SE", "Sammamish", "WA", 98075, "rec", true); 
-		Member mem2 = new Member("Brandon", "Leon", "brleon@calpoly.edu", "8182319169", "7357 Genesta Ave", "Van Nuys", "CA", 91406, "rec", true); 
-		members.add(mem1); 
-		members.add(mem2); 
-		// TODO(Courtney) Remove once hooked up to backend 
+	public void populateMembers() {
+		getMemberList(); 
 		
 		memberContainer.getChildren().clear();
 
@@ -80,7 +76,7 @@ public class MemberListController {
 	 * Method to add members to the member container
 	 * @param member one member from the list of members acquired from the database
 	 */
-	private void addMemberToContainer(Member member) {
+	public void addMemberToContainer(Member member) {
 		// create a new "pane"
 		Pane newPane = null;
 		
@@ -123,6 +119,8 @@ public class MemberListController {
     	Pane myPane = null; 
     	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
     	myPane = (Pane) loader.load(); 
+		NewMemberFormController memberController = loader.<NewMemberFormController>getController();
+		memberController.setMemberListController(this);
     	Scene scene = new Scene(myPane); 
     	stage.setScene(scene);
     	stage.show(); 
@@ -137,5 +135,25 @@ public class MemberListController {
 	@FXML
 	public void searchButtonClick(ActionEvent event) throws IOException {
 		// TODO (Courtney) Urgent fill this in
+	}
+	private void getMemberList() {
+		members.clear();
+		DatabaseCommunicator.getInstance();
+		// populate member list from back end
+		List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(
+				"SELECT * from members");
+		for (HashMap<String, Object> row : rows) {
+			Member member = new Member(); 
+			member.setFirstName(row.get("first_name").toString());
+			member.setLastName(row.get("last_name").toString());
+			member.setEmail(row.get("email").toString());
+			member.setPhoneNumber(row.get("phone_number").toString());
+			member.setAddress(row.get("address").toString());
+			member.setCity(row.get("city").toString());
+			member.setState(row.get("state").toString());
+			member.setZipCode(Integer.parseInt(row.get("zip_code").toString()));
+			member.setMemberType(row.get("member_type").toString());
+			this.members.add(member); 
+		}
 	}
 }
