@@ -97,10 +97,14 @@ public class EditMemberController {
 	 */
 	@FXML
 	public void deleteMember(ActionEvent event) {
-		//TODO fill this in
+		DatabaseCommunicator.deleteFromDatabase(member, "'"+member.getPhoneNumber()+"'"); 
+
 		// update member list view
 		controller.populateMembers();
-
+		
+		// close the new member form
+		Stage currentStage = (Stage) saveButton.getScene().getWindow();
+		currentStage.close();
 	}
 	
 	public void setMember(Member member) {

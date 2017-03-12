@@ -47,6 +47,11 @@ public class DatabaseCommunicator
 		databaseUpdate(insertStatement); 
 	}
 	
+	public static void deleteFromDatabase(DatabaseObject object, String keyValue) {
+		String deleteStatement = "DELETE FROM " + object.getTable() + " WHERE " + object.getKeyIdentifier() + "=" + 
+				keyValue + ";"; 
+		databaseUpdate(deleteStatement); 
+	}
 	/**
 	 * Method to update the values of an entity in the database
 	 * Use of replace rather than update allows bypassing checking which values were changed
