@@ -19,7 +19,7 @@ import com.mysql.jdbc.Statement;
 public class DatabaseCommunicator 
 {
 	private static final String DATABASE_URL = "jdbc:mysql://checkyodata.cqxvubssbsqb.us-west-2.rds.amazonaws.com:3306/";
-	private static final String DATABASE_NAME = "CheckYoRecords"; 
+	private static final String DATABASE_NAME = "meathead_manager"; 
 	private static DatabaseCommunicator instance; 
 	private static Connection connection = null; 
 	
@@ -28,7 +28,7 @@ public class DatabaseCommunicator
 	/**
 	 * Method to retrieve the DatabaseCommunicator that handles the database queries
 	 * @return the DatabaseCommunicator instance with an established connection
-	 */
+	*/
 	public static DatabaseCommunicator getInstance() {
 		if (instance == null) {
 			instance = new DatabaseCommunicator(); 
