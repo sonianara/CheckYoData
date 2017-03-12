@@ -13,5 +13,6 @@
          </content>
       </ScrollPane>
       <Button fx:id="newMemberButton" layoutX="479.0" layoutY="358.0" mnemonicParsing="false" onAction="#addMemberButtonClick" text="New Member" />
+      <Button layoutX="14.0" layoutY="358.0" mnemonicParsing="false" text="Search" />
    </children>
 </Pane>

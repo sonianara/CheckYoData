@@ -37,10 +37,34 @@ public class DatabaseCommunicator
 		return instance; 
 	}
 	
+	/** 
+	 * Method to insert Java objects to the database
+	 * @param object any instance of a DatabaseObject
+	 */
+	public static void addToDatabase(DatabaseObject object) {
+		String insertStatement = "INSERT INTO " + object.getTable() + "(" + object.getKeys() + ") VALUES (" + 
+				object.getValues() + ");"; 
+		databaseUpdate(insertStatement); 
+	}
+	
+	/**
+	 * Method to update the values of an entity in the database
+	 * Use of replace rather than update allows bypassing checking which values were changed
+	 * Not best practice but used for short implementation timeline
+	 * @param object the object with updated values
+	 */
+	public static void replaceDatabase(DatabaseObject object)
+	{
+		String update = ("REPLACE INTO " + object.getTable() + " (" + object.getKeys() + ") "
+				+ "VALUES (" + object.getValues() + ");");
+		databaseUpdate(update);
+	}
+	
 	/**
 	 * Method to query the database for some information 
+	 * Note the keys from the returned HashMaps are the table column names
 	 * @param query The SQL query describing the desired information
-	 * @return
+	 * @return a list of "rows" resulting from the query
 	 */
 	public static List<HashMap<String, Object>> queryDatabase(String query)
 	{

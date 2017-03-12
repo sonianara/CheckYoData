@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 public class MemberListController {
 	@FXML private VBox memberContainer; 
 	@FXML private Button newMemberButton; 
+	@FXML private Button searchButton; 
 	
 	List<Member> members = new ArrayList<Member>(); 
 	
@@ -112,7 +113,7 @@ public class MemberListController {
 	
 	/**
 	 * Method to open a new member form upon clicking the "Add Member" button
-	 * @param event necessary for onClick action
+	 * @param event necessary for javafx onAction
 	 * @throws IOException
 	 */
 	@FXML
@@ -125,5 +126,16 @@ public class MemberListController {
     	Scene scene = new Scene(myPane); 
     	stage.setScene(scene);
     	stage.show(); 
+	}
+	
+	/**
+	 * Method to search the member directory by the specified parameter
+	 * Supports search by last name, phone number, or email
+	 * @param event necessary for javafx onAction
+	 * @throws IOException
+	 */
+	@FXML
+	public void searchButtonClick(ActionEvent event) throws IOException {
+		// TODO (Courtney) Urgent fill this in
 	}
 }

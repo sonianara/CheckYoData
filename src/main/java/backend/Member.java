@@ -1,6 +1,6 @@
 package backend;
 
-public class Member {
+public class Member implements DatabaseObject {
 	private String firstName; 
 	private String lastName; 
 	private String email; 
@@ -109,6 +109,28 @@ public class Member {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	@Override
+	public String getKeys() {
+		return "email, first_name, last_name, phone_number, address, city, state, zip_code, member_type, is_active";
+	}
+
+	@Override
+	public String getValues() {
+		return "'" + email + "', '" + this.firstName + "', '" + this.lastName + "', '" + this.phoneNumber + "', '" +
+				this.address + "', '" + this.city + "', '" + this.state + "', " + this.zipCode + ", '" + this.memberType + 
+				"', '" + this.isActive + "'";
+	}
+
+	@Override
+	public String getTable() {
+		return "members";
+	}
+
+	@Override
+	public String getKeyIdentifier() {
+		return "phone_number";
 	}
 	
 }
