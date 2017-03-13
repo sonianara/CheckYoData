@@ -15,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -197,7 +198,6 @@ public class Main extends Application {
   }
   
   public void manageClasses(Stage primaryStage) {
-
     primaryStage.setTitle("Manage Classes");
     BorderPane layout = new BorderPane();
     Button backBtn = new Button("Back");
@@ -211,6 +211,8 @@ public class Main extends Application {
       }
     });
     VBox classList = new VBox(5); //sets spacing
+    
+    
     Label c1 = new Label("Spin");
     Label c2 = new Label("Body Pump");
     Label c3 = new Label("Yoga");
