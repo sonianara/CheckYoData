@@ -1,12 +1,16 @@
-package com.cpe365;
+package frontend;
 
+import java.io.IOException;
 import java.sql.SQLException;
+
+import backend.DatabaseCommunicator;
 import javafx.application.Application;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,14 +22,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class Main extends Application {    
+public class Main extends Application {   
+	
+	DatabaseCommunicator databaseCommunicator = null; 
   
   /**
    * Login screen
@@ -103,6 +108,19 @@ public class Main extends Application {
     sp.setStyle("-fx-background-color : #e1e1e5;");
     primaryStage.setScene(new Scene(sp, 800, 800));
     primaryStage.show();
+    
+    // Initiate database connection
+    databaseCommunicator = DatabaseCommunicator.getInstance(); 
+
+  }
+  
+  /** 
+   * Method to close the connection when the window is closed
+   */
+  @Override
+  public void stop() throws SQLException {
+	  databaseCommunicator.closeConnection(); 
+	  
   }
   
   public void accountForm(Stage primaryStage) {
@@ -117,21 +135,43 @@ public class Main extends Application {
     HBox buttons = new HBox(10);
     buttons.setAlignment(Pos.CENTER);
     
-    Button memberMan = new Button("Employee Management");
+    Button employeeMan = new Button("Employee Management");
     Button classMan = new Button("Class Management");
     Button inventoryMan = new Button("Inventory Management");
+    Button memberMan = new Button("Member Management"); 
 
-    memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+    employeeMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
     classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
     inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+    memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
 
-    buttons.getChildren().addAll(memberMan, classMan, inventoryMan);
+    buttons.getChildren().addAll(memberMan, employeeMan, classMan, inventoryMan);
     
-    memberMan.setOnAction(new EventHandler<ActionEvent>() {
+    employeeMan.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
         manageEmployees(primaryStage);
       }
+    });
+    
+    memberMan.setOnAction(new EventHandler<ActionEvent>() {
+    	@Override
+    	public void handle(ActionEvent event) {
+    		try {
+    			// Open the member list
+    	    	String fxmlFile = "MemberListView.fxml"; 
+    	    	Stage stage = new Stage(); 
+    	    	Pane myPane = null; 
+    	    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    	    	myPane = (Pane) loader.load(); 
+    	    	Scene scene = new Scene(myPane); 
+    	    	stage.setScene(scene);
+    	    	stage.show(); 
+    		}
+    		catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    	}
     });
     
     classMan.setOnAction(new EventHandler<ActionEvent>() {
@@ -154,6 +194,7 @@ public class Main extends Application {
     primaryStage.show();
  
   }
+  
   
   public HBox menuBar() {
     Hyperlink home = new Hyperlink("Home");
