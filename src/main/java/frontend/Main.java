@@ -159,7 +159,7 @@ public class Main extends Application {
     	public void handle(ActionEvent event) {
     		try {
     			// Open the member list
-    	    	String fxmlFile = "MemberListView.fxml"; 
+    	    	String fxmlFile = "MemberListView.fxml";
     	    	Stage stage = new Stage(); 
     	    	Pane myPane = null; 
     	    	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
