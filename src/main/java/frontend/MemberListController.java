@@ -33,14 +33,14 @@ public class MemberListController {
 	
 	@FXML
 	public void initialize() {
-		populateMembers(); 
+		populateMembers(null); 
 	}
 	
 	/**
 	 * Method to populate the member list with database table
 	 */
-	public void populateMembers() {
-		getMemberList(); 
+	public void populateMembers(String filter) {
+		getMemberList(filter); 
 		
 		memberContainer.getChildren().clear();
 
@@ -147,12 +147,18 @@ public class MemberListController {
     	stage.show(); */
 
 	}
-	private void getMemberList() {
+	private void getMemberList(String filter) {
 		members.clear();
 		DatabaseCommunicator.getInstance();
+
+		String query = "SELECT * from members";
+		// add filters to the query if any were specified
+		if (filter != null) 
+			query += " where " + filter;
+		
 		// populate member list from back end
 		List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(
-				"SELECT * from members");
+				query);
 		for (HashMap<String, Object> row : rows) {
 			Member member = new Member(); 
 			member.setFirstName(row.get("first_name").toString());
