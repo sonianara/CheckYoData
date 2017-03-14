@@ -134,7 +134,7 @@ public class MemberListController {
 	 */
 	@FXML
 	public void searchButtonClick(ActionEvent event) throws IOException {
-		System.out.println("search button clicked");
+		/*System.out.println("search button clicked");
 		String fxmlFile = "SearchMemberForm.fxml"; 
     	Stage stage = new Stage(); 
     	Pane myPane = null; 
@@ -144,7 +144,7 @@ public class MemberListController {
 		memberController.setMemberListController(this);
     	Scene scene = new Scene(myPane); 
     	stage.setScene(scene);
-    	stage.show(); 
+    	stage.show(); */
 
 	}
 	private void getMemberList() {
