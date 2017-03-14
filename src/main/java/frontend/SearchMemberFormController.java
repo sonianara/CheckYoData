@@ -23,8 +23,27 @@ public class SearchMemberFormController {
 
       DatabaseCommunicator.getInstance();
 
+      String filter = "";
+      // filter based on entered values
+      if (!lastName.trim().isEmpty())
+    	  filter += "last_name = '" + lastName + "'";
+      if (!phoneNumber.trim().isEmpty()) {
+    	  if (filter != "")
+    		  filter += " and ";
+    	  filter += "phone_number = '" + phoneNumber + "'";
+      }
+      if (!email.trim().isEmpty()) {
+    	  if (filter != "")
+    		  filter += " and ";
+    	  filter += "email = '" + email + "'";
+      }
+      
+      // if no filtering was entered, set the filter to null
+      if (filter == "")
+    	  filter = null;
+      
       // update the member list view
-      controller.populateMembers();
+      controller.populateMembers(filter);
 
       // close the new member form
       Stage currentStage = (Stage) searchButton.getScene().getWindow();

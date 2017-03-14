@@ -54,7 +54,7 @@ public class NewMemberFormController {
 		DatabaseCommunicator.addToDatabase(newMember);
 		
 		// update the member list view
-		controller.populateMembers();
+		controller.populateMembers(null);
 		
 		// close the new member form
 		Stage currentStage = (Stage) submitButton.getScene().getWindow();
