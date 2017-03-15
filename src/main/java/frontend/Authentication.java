@@ -1,6 +1,10 @@
 package frontend;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+
+import backend.DatabaseCommunicator;
 
 public class Authentication {
 
@@ -9,6 +13,17 @@ public class Authentication {
   }
   
   public boolean login(String username, String password) throws ClassNotFoundException, SQLException {
+	DatabaseCommunicator.getInstance();
+	
+	String query = "SELECT * from users where username = '" + username + "' and password = '" + password + "';";
+	
+	// populate member list from back end
+	List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(
+			query);
+	
+	if (rows.size() == 1)
+		return true;
+	return false;
     /*
     boolean login;
     Connection conn = null;
@@ -42,7 +57,6 @@ public class Authentication {
       login = false;
     }
     return login; */
-    return true;
   } 
 
 }
