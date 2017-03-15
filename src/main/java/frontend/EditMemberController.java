@@ -107,10 +107,18 @@ public class EditMemberController {
 		currentStage.close();
 	}
 	
+	/**
+	 * Method to specify which member is being edited
+	 * @param member The Member that is being edited
+	 */
 	public void setMember(Member member) {
 		this.member = member; 
 	}
-
+	
+	/**
+	 * Method used to update the view after the member is updated
+	 * @param controller The controller that modifies the member list view 
+	 */
 	public void setController(MemberListController controller) {
 		this.controller = controller; 
 	}

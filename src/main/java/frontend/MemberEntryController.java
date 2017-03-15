@@ -56,10 +56,18 @@ public class MemberEntryController {
     	stage.show();   
 	}
 	
+	/**
+	 * Method to specify which member is being edited
+	 * @param member The Member that is being edited
+	 */
 	public void setMember(Member member) {
 		this.member = member; 
 	}
 	
+	/**
+	 * Method used to update the view after the member is updated
+	 * @param controller The controller that modifies the member list view 
+	 */
 	public void setMemberController(MemberListController controller) {
 		this.memberListController = controller; 
 	}

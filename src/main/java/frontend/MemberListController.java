@@ -147,6 +147,12 @@ public class MemberListController {
     	stage.show(); */
 
 	}
+	
+	/**
+	 * Method to get the list of members to populate the view
+	 * Uses filter for the searching feature only
+	 * @param filter can search by different attributes (first_name, list_name, phone number, email) 
+	 */
 	private void getMemberList(String filter) {
 		members.clear();
 		DatabaseCommunicator.getInstance();
