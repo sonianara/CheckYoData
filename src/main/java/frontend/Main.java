@@ -2,7 +2,6 @@ package frontend;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import backend.DatabaseCommunicator;
 import javafx.application.Application;
 import javafx.beans.binding.BooleanBinding;
@@ -36,8 +35,8 @@ public class Main extends Application {
    * Login screen
    */
   
-  Authentication auth = new Authentication();
-  
+	Authentication auth = new Authentication();
+	
   public void start(final Stage primaryStage) {
     BorderPane bp = new BorderPane();
     Label name = new Label("Meathead Manager");
@@ -177,7 +176,19 @@ public class Main extends Application {
     classMan.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        manageClasses(primaryStage);
+        try {
+          Stage stage = new Stage(); 
+          Pane myPane = null; 
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassListView.fxml"));
+          myPane = (Pane) loader.load(); 
+          Scene scene = new Scene(myPane); 
+          stage.setScene(scene);
+          stage.show(); 
+      }
+      catch (IOException e) {
+          System.out.println("Could not find XML file");
+          e.printStackTrace();
+        }
       }
     });
     
