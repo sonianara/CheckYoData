@@ -28,19 +28,26 @@ public class MemberListController {
 	@FXML private VBox memberContainer; 
 	@FXML private Button newMemberButton; 
 	@FXML private Button searchButton; 
+	@FXML private Button sortFirstNameButton; 
+	@FXML private Button sortLastNameButton; 
+	
+	private boolean firstAscending = true; 
+	private boolean lastAscending = true; 
 	
 	List<Member> members = new ArrayList<Member>(); 
 	
 	@FXML
 	public void initialize() {
-		populateMembers(null); 
+		getMemberList(null, "last_name asc"); 
+
+		populateMembers(); 
 	}
 	
 	/**
 	 * Method to populate the member list with database table
+	 * Member list should be populated before calling this method
 	 */
-	public void populateMembers(String filter) {
-		getMemberList(filter); 
+	public void populateMembers() {
 		
 		memberContainer.getChildren().clear();
 
@@ -134,7 +141,7 @@ public class MemberListController {
 	 */
 	@FXML
 	public void searchButtonClick(ActionEvent event) throws IOException {
-		/*System.out.println("search button clicked");
+		System.out.println("search button clicked");
 		String fxmlFile = "SearchMemberForm.fxml"; 
     	Stage stage = new Stage(); 
     	Pane myPane = null; 
@@ -144,23 +151,53 @@ public class MemberListController {
 		memberController.setMemberListController(this);
     	Scene scene = new Scene(myPane); 
     	stage.setScene(scene);
-    	stage.show(); */
-
+    	stage.show(); 
+	}
+	
+	
+	@FXML
+	public void sortByLastName(ActionEvent event) {
+		String orderAttribute = "last_name "; 
+		// sort by the opposing order
+		orderAttribute += (lastAscending) ? "desc" : "asc"; 	
+		getMemberList(null, orderAttribute); 
+		populateMembers(); 
+		lastAscending = !lastAscending; 
+	}
+	
+	@FXML
+	public void sortByFirstName(ActionEvent event) {
+		String orderAttribute = "first_name "; 
+		// sort by the opposing order
+		orderAttribute += (firstAscending) ? "desc" : "asc"; 	
+		getMemberList(null, orderAttribute); 
+		populateMembers(); 
+		firstAscending = !firstAscending; 
 	}
 	
 	/**
 	 * Method to get the list of members to populate the view
 	 * Uses filter for the searching feature only
 	 * @param filter can search by different attributes (first_name, list_name, phone number, email) 
+	 * @param sortAttribute the attribute to sort the members by. 
+	 * Note the orderAttribute must be in the format "attribute order"
+	 * attribute limited to first_name and last_name
+	 * For example: "first_name asc"
 	 */
-	private void getMemberList(String filter) {
+	public void getMemberList(String filter, String orderAttribute) {
 		members.clear();
 		DatabaseCommunicator.getInstance();
 
-		String query = "SELECT * from members";
+		String query = "SELECT * FROM members";
 		// add filters to the query if any were specified
 		if (filter != null) 
-			query += " where " + filter;
+			query += " WHERE " + filter;
+		// apply any sorting
+		if (orderAttribute != null) 
+			query += " ORDER BY " + orderAttribute; 
+		query += ";"; 
+		
+		System.out.println(query);
 		
 		// populate member list from back end
 		List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(

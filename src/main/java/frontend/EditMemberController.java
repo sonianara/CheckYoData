@@ -84,7 +84,7 @@ public class EditMemberController {
 		DatabaseCommunicator.replaceDatabase(updatedMember);
 
 		// update member list view
-		controller.populateMembers(null);
+		controller.populateMembers();
 		
 		// close the new member form
 		Stage currentStage = (Stage) saveButton.getScene().getWindow();
@@ -100,7 +100,7 @@ public class EditMemberController {
 		DatabaseCommunicator.deleteFromDatabase(member, "'"+member.getPhoneNumber()+"'"); 
 
 		// update member list view
-		controller.populateMembers(null);
+		controller.populateMembers();
 		
 		// close the new member form
 		Stage currentStage = (Stage) saveButton.getScene().getWindow();

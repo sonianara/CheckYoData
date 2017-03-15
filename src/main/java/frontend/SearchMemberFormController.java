@@ -43,7 +43,8 @@ public class SearchMemberFormController {
     	  filter = null;
       
       // update the member list view
-      controller.populateMembers(filter);
+      controller.getMemberList(filter, "last_name asc"); 
+      controller.populateMembers();
 
       // close the new member form
       Stage currentStage = (Stage) searchButton.getScene().getWindow();
