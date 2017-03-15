@@ -1,5 +1,7 @@
 package backend;
 
+import backend.DatabaseObject;
+import backend.Member;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,8 +50,10 @@ public class DatabaseCommunicator
 	}
 	
 	public static void deleteFromDatabase(DatabaseObject object, String keyValue) {
+	  System.out.println("This should be class id: " + object.getKeyIdentifier());
 		String deleteStatement = "DELETE FROM " + object.getTable() + " WHERE " + object.getKeyIdentifier() + "=" + 
 				keyValue + ";"; 
+		System.out.println("Delete statement: " + deleteStatement);
 		databaseUpdate(deleteStatement); 
 	}
 	/**
@@ -63,6 +67,19 @@ public class DatabaseCommunicator
 		String update = ("REPLACE INTO " + object.getTable() + " (" + object.getKeys() + ") "
 				+ "VALUES (" + object.getValues() + ");");
 		databaseUpdate(update);
+	}
+	
+	public static GymClass getGymClass(String classID) {
+	  HashMap<String, Object> row = queryDatabase("SELECT * FROM classes WHERE classID = '" + classID + "';").get(0);
+	  String name = row.get("name").toString();
+	  String startTime = row.get("startTime").toString();
+	  String endTime = row.get("endTime").toString();
+	  String days = row.get("days").toString();
+	  String room = row.get("room").toString();
+	  
+	  GymClass gClass = new GymClass(classID, name, startTime, endTime, days, room);
+	  return gClass;
+	  
 	}
 	
 	public static Member getMember(String phoneNumber) {
