@@ -2,7 +2,6 @@ package frontend;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import backend.DatabaseCommunicator;
 import javafx.application.Application;
 import javafx.beans.binding.BooleanBinding;
@@ -19,6 +18,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -36,8 +36,8 @@ public class Main extends Application {
    * Login screen
    */
   
-  Authentication auth = new Authentication();
-  
+	Authentication auth = new Authentication();
+	
   public void start(final Stage primaryStage) {
     BorderPane bp = new BorderPane();
     Label name = new Label("Meathead Manager");
@@ -52,7 +52,7 @@ public class Main extends Application {
     username.setPromptText("Username");
     name.setStyle("" + "-fx-font-size: 30px;" + "-fx-font-family: Cambria;");
 
-    final TextField password = new TextField();
+    final TextField password = new PasswordField();
     password.setPromptText("Password");
   
     VBox.setMargin(username, new Insets(0, 100, 10, 100));
@@ -177,7 +177,19 @@ public class Main extends Application {
     classMan.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent event) {
-        manageClasses(primaryStage);
+        try {
+          Stage stage = new Stage(); 
+          Pane myPane = null; 
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("ClassListView.fxml"));
+          myPane = (Pane) loader.load(); 
+          Scene scene = new Scene(myPane); 
+          stage.setScene(scene);
+          stage.show(); 
+      }
+      catch (IOException e) {
+          System.out.println("Could not find XML file");
+          e.printStackTrace();
+        }
       }
     });
     

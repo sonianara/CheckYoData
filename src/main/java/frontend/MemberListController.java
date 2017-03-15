@@ -140,7 +140,7 @@ public class MemberListController {
     	Pane myPane = null; 
     	FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
     	myPane = (Pane) loader.load();
-		SearchMemberFormController memberController = loader.<SearchMemberFormController>getController();
+    	SearchMemberFormController memberController = loader.<SearchMemberFormController>getController();
 		memberController.setMemberListController(this);
     	Scene scene = new Scene(myPane); 
     	stage.setScene(scene);
