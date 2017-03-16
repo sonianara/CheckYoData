@@ -29,7 +29,7 @@ public class Reservation implements DatabaseObject {
 
 	@Override
 	public String getValues() {
-		return "'" + member.getEmail() + "', '" + gymClass.getClassID();
+		return "'" + member.getEmail() + "', '" + gymClass.getClassID() + "'";
 	}
 
 	@Override
