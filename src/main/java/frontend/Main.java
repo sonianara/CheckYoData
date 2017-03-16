@@ -158,23 +158,16 @@ public class Main extends Application {
     HBox buttons = new HBox(10);
     buttons.setAlignment(Pos.CENTER);
     
-    Button employeeMan = new Button("Employee Management");
     Button classMan = new Button("Class Management");
     Button inventoryMan = new Button("Inventory Management");
     Button memberMan = new Button("Member Management"); 
 
-    employeeMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
     classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
     inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
     memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
 
-    buttons.getChildren().addAll(memberMan, employeeMan, classMan, inventoryMan);
-    
-    employeeMan.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-      }
-    });
+    buttons.getChildren().addAll(memberMan, classMan, inventoryMan);
+   
     
     memberMan.setOnAction(new EventHandler<ActionEvent>() {
     	@Override
