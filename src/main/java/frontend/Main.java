@@ -154,6 +154,17 @@ public class Main extends Application {
     BorderPane bp = new BorderPane();
     VBox buttons = new VBox(10);
     buttons.setAlignment(Pos.CENTER);
+    
+    Button classMan = new Button("Class Management");
+    Button inventoryMan = new Button("Inventory Management");
+    Button memberMan = new Button("Member Management"); 
+
+    classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+    inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+    memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+
+    buttons.getChildren().addAll(memberMan, classMan, inventoryMan);
+   
     Image image = new Image("http://i67.tinypic.com/jb38ys.png");
     ImageView iv1 = new ImageView();
     iv1.setImage(image);
