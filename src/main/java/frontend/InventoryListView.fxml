@@ -13,6 +13,6 @@
          </content>
       </ScrollPane>
       <Button fx:id="newInventoryButton" layoutX="479.0" layoutY="358.0" mnemonicParsing="false" onAction="#addInventoryItemButtonClick" text="New Inventory" />
-      <Button layoutX="14.0" layoutY="358.0" mnemonicParsing="false" text="Search" />
+      <Button fx:id="searchInventoryButton" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#searchButtonClick" text="Search" />
    </children>
 </Pane>

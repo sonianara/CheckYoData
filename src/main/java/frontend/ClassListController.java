@@ -42,7 +42,6 @@ public class ClassListController {
    * Method to populate the class list with database table
    */
   public void populateClasses() {
-      System.out.println("hello");
       classContainer.getChildren().clear();
 
       addLabelsToContainer(); 

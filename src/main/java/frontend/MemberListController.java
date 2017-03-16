@@ -179,7 +179,7 @@ public class MemberListController {
 	 * Method to get the list of members to populate the view
 	 * Uses filter for the searching feature only
 	 * @param filter can search by different attributes (first_name, list_name, phone number, email) 
-	 * @param sortAttribute the attribute to sort the members by. 
+	 * @param orderAttribute the attribute to sort the members by.
 	 * Note the orderAttribute must be in the format "attribute order"
 	 * attribute limited to first_name and last_name
 	 * For example: "first_name asc"

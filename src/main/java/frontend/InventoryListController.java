@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Created by Kimmy on 3/15/17.
+ * Created by Kimberley on 3/15/17.
  */
 public class InventoryListController {
   @FXML private VBox inventoryContainer;
@@ -25,23 +25,22 @@ public class InventoryListController {
   @FXML private Button searchInventoryButton;
 
 
-  List<InventoryItem> inventoryItems = new ArrayList<>();
+  List<InventoryItem> inventoryItems = new ArrayList<InventoryItem>();
 
   @FXML
   public void initialize() {
-    getInventoryList();
-
+    getInventoryList(null);
     populateInventory();
   }
 
   public void populateInventory() {
-
-    getInventoryList();
+	  System.out.println("Clearing");
     inventoryContainer.getChildren().clear();
 
     addLabelsToContainer();
 
     for (int i = 0; i < inventoryItems.size(); i++) {
+    	System.out.println(inventoryItems.get(i));
       addInventoryItemToContainer(inventoryItems.get(i));
     }
 
@@ -89,6 +88,7 @@ public class InventoryListController {
   @FXML
   public void addInventoryItemButtonClick(ActionEvent event) throws IOException {
     String fxmlFile = "NewInventoryForm.fxml";
+    System.out.println("HERE ADDING");
     Stage stage = new Stage();
     Pane myPane = null;
     FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -102,30 +102,33 @@ public class InventoryListController {
 
   @FXML
   public void searchButtonClick(ActionEvent event) throws IOException {
-//    System.out.println("search button clicked");
-//    String fxmlFile = "SearchMemberForm.fxml";
-//    Stage stage = new Stage();
-//    Pane myPane = null;
-//    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-//    myPane = (Pane) loader.load();
-//    SearchMemberFormController inventoryItemController = loader.<SearchMemberFormController>getController();
-//    memberController.setMemberListController(this);
-//    Scene scene = new Scene(myPane);
-//    stage.setScene(scene);
-//    stage.show();
+    System.out.println("search button clicked");
+    String fxmlFile = "SearchInventoryForm.fxml";
+    Stage stage = new Stage();
+    Pane myPane = null;
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    myPane = (Pane) loader.load();
+    SearchInventoryFormController inventoryItemController = loader.<SearchInventoryFormController>getController();
+    inventoryItemController.setInventoryListController(this);
+    Scene scene = new Scene(myPane);
+    stage.setScene(scene);
+    stage.show();
   }
 
-  public void getInventoryList() {
+  public void getInventoryList(String filter) {
     inventoryItems.clear();
     DatabaseCommunicator.getInstance();
 
     String query = "SELECT * FROM inventory";
-    query += ";";
-    System.out.println(query);
+    // add filters to the query if any were specified
+    if (filter != null) 
+        query += " WHERE " + filter;
+    query += ";"; 
 
     List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(
         query);
     for (HashMap<String, Object> row : rows) {
+    	System.out.println("HEREERE");
       InventoryItem item = new InventoryItem();
       item.setName(row.get("name").toString());
       item.setCount(Integer.parseInt(row.get("count").toString()));
