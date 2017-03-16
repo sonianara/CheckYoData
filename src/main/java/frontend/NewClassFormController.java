@@ -15,6 +15,7 @@ public class NewClassFormController {
   @FXML private TextField endTimeText; 
   @FXML private TextField daysText; 
   @FXML private TextField roomText; 
+  @FXML private TextField capacityText;
   @FXML private Button submitButton; 
   
   private ClassListController controller; 
@@ -27,8 +28,9 @@ public class NewClassFormController {
     String endTime = endTimeText.getText().toString();
     String days = daysText.getText().toString();
     String room = roomText.getText().toString(); 
+    int capacity = Integer.parseInt(capacityText.getText());
 
-    GymClass newClass = new GymClass(classID, className, startTime, endTime, days, room); 
+    GymClass newClass = new GymClass(classID, className, startTime, endTime, days, room, capacity, 0); 
       
       DatabaseCommunicator.getInstance(); 
       DatabaseCommunicator.addToDatabase(newClass);
