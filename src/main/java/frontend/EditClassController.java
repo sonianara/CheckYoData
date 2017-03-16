@@ -63,7 +63,7 @@ public class EditClassController {
       DatabaseCommunicator.deleteFromDatabase(gymClass, "'"+gymClass.getClassID()+"'"); 
 
       // update class list view
-      controller.populateClasses();
+      controller.initialize();
       
       // close the new class form
       Stage currentStage = (Stage) saveButton.getScene().getWindow();

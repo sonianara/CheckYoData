@@ -101,6 +101,7 @@ public class EditMemberController {
 		DatabaseCommunicator.deleteFromDatabase(member, "'"+member.getPhoneNumber()+"'"); 
 
 		// update member list view
+		controller.getMemberList(null, "last_name desc");
 		controller.populateMembers();
 		
 		// close the new member form

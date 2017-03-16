@@ -72,6 +72,7 @@ public class ClassEntryController {
     classID.setText(gymClass.getClassID());
     classID.setAlignment(Pos.CENTER);
     classID.setDisable(true); 
+    registrationController.setClassListController(classListController);
     DatabaseCommunicator.getInstance(); 
     registrationController.setGymClass(DatabaseCommunicator.getGymClass(classID.getText())); 
   

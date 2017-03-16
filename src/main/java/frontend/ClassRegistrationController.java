@@ -23,7 +23,8 @@ public class ClassRegistrationController {
   @FXML ComboBox memberBox;
   @FXML Button registerButton; 
   
-  GymClass gymClass;
+  private GymClass gymClass;
+  private ClassListController classListController; 
   
   @FXML 
   public void initialize() {
@@ -46,6 +47,8 @@ public class ClassRegistrationController {
       Alert alertSuccess = new Alert(AlertType.INFORMATION);
         alertSuccess.setContentText("Class was reserved for: \n" + member.getFirstName() + " " + member.getLastName());
       alertSuccess.showAndWait(); 
+      
+      classListController.initialize(); 
     }
     
     // class is full
@@ -70,5 +73,9 @@ public class ClassRegistrationController {
   
   public void setGymClass(GymClass gymClass) {
     this.gymClass = gymClass; 
+  }
+  
+  public void setClassListController(ClassListController controller) {
+	  this.classListController = controller; 
   }
 }
