@@ -1,5 +1,6 @@
 package frontend;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import backend.DatabaseCommunicator;
@@ -21,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -40,8 +43,11 @@ public class Main extends Application {
 	
   public void start(final Stage primaryStage) {
     BorderPane bp = new BorderPane();
-    Label name = new Label("Meathead Manager");
-    name.setPadding(new Insets(0, 0, 50, 0));
+    Image image = new Image("http://i67.tinypic.com/jb38ys.png");
+    ImageView iv1 = new ImageView();
+    iv1.setImage(image);
+//    name.setPadding(new Insets(0, 0, 50, 0));
+
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setContentText("Incorrect Username and Password");
     StackPane sp = new StackPane();
@@ -51,7 +57,7 @@ public class Main extends Application {
     final BooleanProperty firstTime = new SimpleBooleanProperty(true);
     final TextField username = new TextField();
     username.setPromptText("Username");
-    name.setStyle("" + "-fx-font-size: 30px;" + "-fx-font-family: Cambria;");
+//    name.setStyle("" + "-fx-font-size: 30px;" + "-fx-font-family: Helvetica Neue;");
 
     final TextField password = new PasswordField();
     password.setPromptText("Password");
@@ -59,8 +65,8 @@ public class Main extends Application {
     VBox.setMargin(username, new Insets(0, 100, 10, 100));
     VBox.setMargin(password, new Insets(0, 100, 10, 100));
     
-    textfields.getChildren().addAll(name, username, password, loginBtn, newAccountBtn);
-
+    textfields.getChildren().addAll(iv1, username, password, loginBtn, newAccountBtn);
+//    bp.setTop(iv1);
     bp.setCenter(textfields);
   
     BooleanBinding bb = new BooleanBinding() {
@@ -154,7 +160,6 @@ public class Main extends Application {
   
   public void homeScreen(Stage primaryStage) {
     BorderPane bp = new BorderPane();
-    bp.setTop(menuBar());
     HBox buttons = new HBox(10);
     buttons.setAlignment(Pos.CENTER);
     
@@ -163,10 +168,10 @@ public class Main extends Application {
     Button inventoryMan = new Button("Inventory Management");
     Button memberMan = new Button("Member Management"); 
 
-    employeeMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
-    classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
-    inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
-    memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Cambria;");
+    employeeMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
+    classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
+    inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
+    memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
 
     buttons.getChildren().addAll(memberMan, employeeMan, classMan, inventoryMan);
     
@@ -242,17 +247,6 @@ public class Main extends Application {
  
   }
   
-  
-  public HBox menuBar() {
-    Hyperlink home = new Hyperlink("Home");
-    Hyperlink pricing = new Hyperlink("Pricing");
-    Hyperlink contact = new Hyperlink("Contact");
-    HBox items = new HBox();
-    items.getChildren().addAll(home, pricing, contact);
-    return items;
-  }
-  
-
 
   public static void main(String[] args) {
     launch(args);
