@@ -7,9 +7,11 @@ import backend.DatabaseCommunicator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -26,7 +28,7 @@ public class ClassEntryController {
   @FXML private Label className; 
   @FXML private Label startTime; 
   @FXML private Label endTime; 
-  @FXML private Label days; 
+  @FXML private Label date; 
   @FXML private Label room; 
   @FXML private Button editButton; 
 
@@ -52,6 +54,28 @@ public class ClassEntryController {
       editClassController.populateFields();
   
       Scene scene = new Scene(myPane); 
+      stage.setScene(scene);    
+      stage.show();   
+  }
+  
+  @FXML 
+  public void reserveAction(ActionEvent event) throws IOException {
+    Stage stage = new Stage();
+    Pane myPane = null; 
+
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClassRegistrationForm.fxml"));     
+    myPane = (Pane)fxmlLoader.load();
+
+    // Sets values so the ResourceEntryController knows which course it contains.
+    ClassRegistrationController registrationController = fxmlLoader.<ClassRegistrationController>getController();
+    TextField classID = (TextField) myPane.lookup("#classID");
+    classID.setText(gymClass.getClassID());
+    classID.setAlignment(Pos.CENTER);
+    classID.setDisable(true); 
+    DatabaseCommunicator.getInstance(); 
+    registrationController.setGymClass(DatabaseCommunicator.getGymClass(classID.getText())); 
+  
+    Scene scene = new Scene(myPane); 
       stage.setScene(scene);    
       stage.show();   
   }

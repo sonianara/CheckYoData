@@ -1,6 +1,5 @@
 package frontend;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import backend.DatabaseCommunicator;
@@ -17,15 +16,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -158,29 +153,21 @@ public class Main extends Application {
     BorderPane bp = new BorderPane();
     VBox buttons = new VBox(10);
     buttons.setAlignment(Pos.CENTER);
+   
     Image image = new Image("http://i67.tinypic.com/jb38ys.png");
     ImageView iv1 = new ImageView();
     iv1.setImage(image);
-    Button employeeMan = new Button("Employee Management");
     Button classMan = new Button("Class Management");
     Button inventoryMan = new Button("Inventory Management");
     Button memberMan = new Button("Member Management"); 
     bp.setTop(iv1);
     bp.setAlignment(iv1, Pos.TOP_CENTER);
     bp.setMargin(iv1, new Insets(200, 0, -200, 0));
-    employeeMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
     classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
     inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
     memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
 
-    buttons.getChildren().addAll(memberMan, employeeMan, classMan, inventoryMan);
-  
-    
-    employeeMan.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-      }
-    });
+    buttons.getChildren().addAll(memberMan, classMan, inventoryMan);
     
     memberMan.setOnAction(new EventHandler<ActionEvent>() {
     	@Override

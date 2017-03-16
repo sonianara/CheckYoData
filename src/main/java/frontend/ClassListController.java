@@ -42,7 +42,7 @@ public class ClassListController {
    * Method to populate the class list with database table
    */
   public void populateClasses() {
-          
+      System.out.println("hello");
       classContainer.getChildren().clear();
 
       addLabelsToContainer(); 
@@ -70,6 +70,7 @@ public class ClassListController {
       }
       classContainer.getChildren().add(newPane);
       newPane.getChildren().remove(newPane.lookup("#editButton"));
+      newPane.getChildren().remove(newPane.lookup("#addReservationButton"));
   }
 
   /**
@@ -94,7 +95,7 @@ public class ClassListController {
       classController.setClass(gymClass);
       classController.setClassController(this);
       
-  // set the values for the pane
+      // set the values for the pane
       classContainer.getChildren().add(newPane);
       Label classID = (Label) newPane.lookup("#classID");
       Label name = (Label) newPane.lookup("#className");
@@ -103,6 +104,7 @@ public class ClassListController {
       Label date = (Label) newPane.lookup("#date");
       Label room = (Label) newPane.lookup("#room");
       Label capacity = (Label) newPane.lookup("#capacity");
+      Label reserved = (Label) newPane.lookup("#reserved");
       
       classID.setText(gymClass.getClassID());
       name.setText(gymClass.getName());
@@ -111,6 +113,7 @@ public class ClassListController {
       date.setText(gymClass.getDate());
       room.setText(gymClass.getRoom());
       capacity.setText(Integer.toString(gymClass.getCapacity()));
+      reserved.setText(Integer.toString(gymClass.getReserved()));
   }
   
   /**
@@ -178,6 +181,7 @@ public class ClassListController {
           gymClass.setDate(row.get("date").toString());
           gymClass.setRoom(row.get("room").toString());
           gymClass.setCapacity((int) row.get("capacity"));
+          gymClass.setReserved((int) row.get("reserved"));
           this.classes.add(gymClass); 
       }
   }

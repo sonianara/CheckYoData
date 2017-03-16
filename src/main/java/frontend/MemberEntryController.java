@@ -2,8 +2,6 @@ package frontend;
 
 import java.io.IOException;
 
-import javax.swing.GroupLayout.Alignment;
-
 import backend.DatabaseCommunicator;
 import backend.Member;
 import javafx.event.ActionEvent;
@@ -15,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
