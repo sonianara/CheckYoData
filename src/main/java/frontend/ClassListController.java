@@ -32,17 +32,17 @@ public class ClassListController {
   @FXML private Button searchButton; 
   
   @FXML
-  public void initialize() {
+  public void initialize() {     
+      getClassList(null); 
       populateClasses(); 
   }
+ 
   
   /**
    * Method to populate the class list with database table
    */
   public void populateClasses() {
-    
-      getClassList(); 
-      
+          
       classContainer.getChildren().clear();
 
       addLabelsToContainer(); 
@@ -137,18 +137,36 @@ public class ClassListController {
    */
   @FXML
   public void searchButtonClick(ActionEvent event) throws IOException {
-      //TO-DO
+    System.out.println("search button clicked");
+    String fxmlFile = "SearchClassForm.fxml"; 
+    Stage stage = new Stage(); 
+    Pane myPane = null; 
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+    myPane = (Pane) loader.load();
+    SearchClassFormController classController = loader.<SearchClassFormController>getController();
+    classController.setClassListController(this);
+    Scene scene = new Scene(myPane); 
+    stage.setScene(scene);
+    stage.show(); 
   }
   
   /**
    * fetch classes from the classes table 
    */
-  private void getClassList() {
+  public void getClassList(String filter) {
       classes.clear();
       DatabaseCommunicator.getInstance();
+      
+      String query = "SELECT * FROM classes";
+      // add filters to the query if any were specified
+      if (filter != null) 
+          query += " WHERE " + filter;
+      query += ";"; 
+
+      System.out.println(query);
+      
       // populate class list from back end
-      List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(
-              "SELECT * from classes");
+      List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(query);
       for (HashMap<String, Object> row : rows) {
           GymClass gymClass = new GymClass(); 
           gymClass.setClassID(row.get("classID").toString());
