@@ -84,6 +84,7 @@ public class EditMemberController {
 		DatabaseCommunicator.replaceDatabase(updatedMember);
 
 		// update member list view
+		controller.getMemberList(null, "last_name asc");
 		controller.populateMembers();
 		
 		// close the new member form

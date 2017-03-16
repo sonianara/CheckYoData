@@ -46,7 +46,6 @@ public class Main extends Application {
     alert.setContentText("Incorrect Username and Password");
     StackPane sp = new StackPane();
     Button loginBtn = new Button("Login");
-    Button newAccountBtn = new Button("Create Account");
     VBox textfields = new VBox();
     final BooleanProperty firstTime = new SimpleBooleanProperty(true);
     final TextField username = new TextField();
@@ -58,7 +57,7 @@ public class Main extends Application {
     VBox.setMargin(username, new Insets(0, 100, 10, 100));
     VBox.setMargin(password, new Insets(0, 100, 10, 100));
 
-    textfields.getChildren().addAll(iv1, username, password, loginBtn, newAccountBtn);
+    textfields.getChildren().addAll(iv1, username, password, loginBtn);
     bp.setCenter(textfields);
     BooleanBinding bb = new BooleanBinding() {
       {
@@ -101,27 +100,6 @@ public class Main extends Application {
     });
     
     
-    // display the new account form and allow user to create a new account
-    newAccountBtn.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-		try {
-		  // Open the member list
-		  String fxmlFile = "NewAccountForm.fxml";
-		  Stage stage = new Stage(); 
-		  Pane myPane = null; 
-		  FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-		  myPane = (Pane) loader.load(); 
-		  Scene scene = new Scene(myPane); 
-		  stage.setScene(scene);
-		  stage.show(); 
-		}
-		catch (IOException e) {
-		  e.printStackTrace();
-		}
-	  }
-    });
-
     textfields.setAlignment(Pos.CENTER);
     sp.getChildren().add(bp);
     sp.getChildren().add(textfields);

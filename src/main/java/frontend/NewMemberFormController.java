@@ -54,6 +54,7 @@ public class NewMemberFormController {
 		DatabaseCommunicator.addToDatabase(newMember);
 		
 		// update the member list view
+		controller.getMemberList(null, "last_name asc");
 		controller.populateMembers();
 		
 		// close the new member form

@@ -30,10 +30,15 @@ public class ClassListController {
   @FXML private VBox classContainer; 
   @FXML private Button newClassButton; 
   @FXML private Button searchButton; 
+  @FXML private Button sortByDate; 
+  @FXML private Button sortByClassName; 
+  
+  private boolean classNameAsc = true; 
+  private boolean dateAsc = true; 
   
   @FXML
   public void initialize() {     
-      getClassList(null); 
+      getClassList(null, "name asc"); 
       populateClasses(); 
   }
  
@@ -153,10 +158,30 @@ public class ClassListController {
     stage.show(); 
   }
   
+	@FXML
+	public void sortByClassName(ActionEvent event) {
+		String orderAttribute = "name "; 
+		// sort by the opposing order
+		orderAttribute += (classNameAsc) ? "asc" : "desc"; 	
+		getClassList(null, orderAttribute); 
+		populateClasses(); 
+		classNameAsc = !classNameAsc; 
+	}
+	
+	@FXML
+	public void sortByDate(ActionEvent event) {
+		String orderAttribute = "date "; 
+		// sort by the opposing order
+		orderAttribute += (dateAsc) ? "asc" : "desc"; 	
+		getClassList(null, orderAttribute); 
+		populateClasses(); 
+		dateAsc = !dateAsc; 
+	}
+  
   /**
    * fetch classes from the classes table 
    */
-  public void getClassList(String filter) {
+  public void getClassList(String filter, String orderAttribute) {
       classes.clear();
       DatabaseCommunicator.getInstance();
       
@@ -164,7 +189,11 @@ public class ClassListController {
       // add filters to the query if any were specified
       if (filter != null) 
           query += " WHERE " + filter;
-      query += ";"; 
+
+	   // apply any sorting
+	   if (orderAttribute != null) 
+		   query += " ORDER BY " + orderAttribute; 
+	   query += ";"; 
 
       // populate class list from back end
       List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(query);
