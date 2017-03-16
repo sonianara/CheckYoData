@@ -62,10 +62,9 @@ public class Main extends Application {
   
     VBox.setMargin(username, new Insets(0, 100, 10, 100));
     VBox.setMargin(password, new Insets(0, 100, 10, 100));
-    
+
     textfields.getChildren().addAll(iv1, username, password, loginBtn, newAccountBtn);
     bp.setCenter(textfields);
-  
     BooleanBinding bb = new BooleanBinding() {
       {
         super.bind(username.textProperty(), password.textProperty());
