@@ -77,6 +77,7 @@ public class MemberListController {
 		}
 		memberContainer.getChildren().add(newPane);
 		newPane.getChildren().remove(newPane.lookup("#editButton"));
+		newPane.getChildren().remove(newPane.lookup("#reservationButton"));
 	}
 
 	/**

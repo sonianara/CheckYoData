@@ -1,5 +1,6 @@
 package frontend;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import backend.DatabaseCommunicator;
@@ -21,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -40,8 +43,10 @@ public class Main extends Application {
 	
   public void start(final Stage primaryStage) {
     BorderPane bp = new BorderPane();
-    Label name = new Label("Meathead Manager");
-    name.setPadding(new Insets(0, 0, 50, 0));
+    Image image = new Image("http://i67.tinypic.com/jb38ys.png");
+    ImageView iv1 = new ImageView();
+    iv1.setImage(image);
+
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setContentText("Incorrect Username and Password");
     StackPane sp = new StackPane();
@@ -51,7 +56,6 @@ public class Main extends Application {
     final BooleanProperty firstTime = new SimpleBooleanProperty(true);
     final TextField username = new TextField();
     username.setPromptText("Username");
-    name.setStyle("" + "-fx-font-size: 30px;" + "-fx-font-family: Cambria;");
 
     final TextField password = new PasswordField();
     password.setPromptText("Password");
@@ -59,8 +63,7 @@ public class Main extends Application {
     VBox.setMargin(username, new Insets(0, 100, 10, 100));
     VBox.setMargin(password, new Insets(0, 100, 10, 100));
     
-    textfields.getChildren().addAll(name, username, password, loginBtn, newAccountBtn);
-
+    textfields.getChildren().addAll(iv1, username, password, loginBtn, newAccountBtn);
     bp.setCenter(textfields);
   
     BooleanBinding bb = new BooleanBinding() {
@@ -129,7 +132,7 @@ public class Main extends Application {
     sp.getChildren().add(bp);
     sp.getChildren().add(textfields);
     sp.setStyle("-fx-background-color : #e1e1e5;");
-    primaryStage.setScene(new Scene(sp, 1100, 800));
+    primaryStage.setScene(new Scene(sp, 800, 800));
     primaryStage.show();
     
     // Initiate database connection
@@ -154,8 +157,7 @@ public class Main extends Application {
   
   public void homeScreen(Stage primaryStage) {
     BorderPane bp = new BorderPane();
-    bp.setTop(menuBar());
-    HBox buttons = new HBox(10);
+    VBox buttons = new VBox(10);
     buttons.setAlignment(Pos.CENTER);
     
     Button classMan = new Button("Class Management");
@@ -168,6 +170,29 @@ public class Main extends Application {
 
     buttons.getChildren().addAll(memberMan, classMan, inventoryMan);
    
+    Image image = new Image("http://i67.tinypic.com/jb38ys.png");
+    ImageView iv1 = new ImageView();
+    iv1.setImage(image);
+    Button employeeMan = new Button("Employee Management");
+    Button classMan = new Button("Class Management");
+    Button inventoryMan = new Button("Inventory Management");
+    Button memberMan = new Button("Member Management"); 
+    bp.setTop(iv1);
+    bp.setAlignment(iv1, Pos.TOP_CENTER);
+    bp.setMargin(iv1, new Insets(200, 0, -200, 0));
+    employeeMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
+    classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
+    inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
+    memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
+
+    buttons.getChildren().addAll(memberMan, employeeMan, classMan, inventoryMan);
+  
+    
+    employeeMan.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+      }
+    });
     
     memberMan.setOnAction(new EventHandler<ActionEvent>() {
     	@Override
@@ -230,22 +255,11 @@ public class Main extends Application {
     
     bp.setCenter(buttons);
     
-    primaryStage.setScene(new Scene(bp, 1100, 800));
+    primaryStage.setScene(new Scene(bp, 800, 800));
     primaryStage.show();
  
   }
   
-  
-  public HBox menuBar() {
-    Hyperlink home = new Hyperlink("Home");
-    Hyperlink pricing = new Hyperlink("Pricing");
-    Hyperlink contact = new Hyperlink("Contact");
-    HBox items = new HBox();
-    items.getChildren().addAll(home, pricing, contact);
-    return items;
-  }
-  
-
 
   public static void main(String[] args) {
     launch(args);

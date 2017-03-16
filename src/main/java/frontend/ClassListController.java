@@ -100,15 +100,17 @@ public class ClassListController {
       Label name = (Label) newPane.lookup("#className");
       Label startTime = (Label) newPane.lookup("#startTime");
       Label endTime = (Label) newPane.lookup("#endTime");
-      Label days = (Label) newPane.lookup("#days");
+      Label date = (Label) newPane.lookup("#date");
       Label room = (Label) newPane.lookup("#room");
+      Label capacity = (Label) newPane.lookup("#capacity");
       
       classID.setText(gymClass.getClassID());
       name.setText(gymClass.getName());
-      startTime.setText(gymClass.getStart());
-      endTime.setText(gymClass.getEnd());
-      days.setText(gymClass.getDays());
+      startTime.setText(gymClass.getStartTime());
+      endTime.setText(gymClass.getEndTime());
+      date.setText(gymClass.getDate());
       room.setText(gymClass.getRoom());
+      capacity.setText(Integer.toString(gymClass.getCapacity()));
   }
   
   /**
@@ -171,10 +173,11 @@ public class ClassListController {
           GymClass gymClass = new GymClass(); 
           gymClass.setClassID(row.get("classID").toString());
           gymClass.setName(row.get("name").toString());
-          gymClass.setStart(row.get("startTime").toString());
-          gymClass.setEnd(row.get("endTime").toString());
-          gymClass.setDays(row.get("days").toString());
+          gymClass.setStartTime(row.get("startTime").toString());
+          gymClass.setEndTime(row.get("endTime").toString());
+          gymClass.setDate(row.get("date").toString());
           gymClass.setRoom(row.get("room").toString());
+          gymClass.setCapacity((int) row.get("capacity"));
           this.classes.add(gymClass); 
       }
   }

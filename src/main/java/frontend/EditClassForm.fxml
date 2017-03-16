@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -7,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.EditClassController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.EditClassController">
    <children>
       <Text layoutX="92.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Class">
          <font>
@@ -28,5 +32,7 @@
       <Label layoutX="48.0" layoutY="198.0" text="Days" />
       <TextField fx:id="roomText" layoutX="83.0" layoutY="228.0" />
       <Label layoutX="8.0" layoutY="99.0" text="Class Name" />
+      <Label layoutX="30.0" layoutY="266.0" text="Capacity" />
+      <TextField fx:id="capacityText" layoutX="83.0" layoutY="262.0" />
    </children>
 </Pane>

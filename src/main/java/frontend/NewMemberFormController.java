@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 import backend.DatabaseCommunicator;
 import backend.Member;
+import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;

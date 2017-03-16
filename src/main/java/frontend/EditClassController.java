@@ -15,6 +15,7 @@ public class EditClassController {
   @FXML private TextField endTimeText; 
   @FXML private TextField daysText; 
   @FXML private TextField roomText; 
+  @FXML private TextField capacityText;
   @FXML private Button saveButton; 
   @FXML private Button deleteButton; 
   
@@ -38,9 +39,10 @@ public class EditClassController {
       String startTime = startTimeText.getText();
       String endTime = endTimeText.getText();
       String days = daysText.getText();
-      String room = roomText.getText(); 
+      String room = roomText.getText();
+      int capacity = Integer.parseInt(capacityText.getText());
            
-      GymClass updatedClass = new GymClass(classID, className, startTime, endTime, days, room); 
+      GymClass updatedClass = new GymClass(classID, className, startTime, endTime, days, room, capacity, 0); 
 
       DatabaseCommunicator.getInstance(); 
       DatabaseCommunicator.replaceDatabase(updatedClass);
@@ -69,9 +71,9 @@ public class EditClassController {
   public void populateFields() {
     classIDText.setText(gymClass.getClassID());
     classNameText.setText(gymClass.getName());
-    startTimeText.setText(gymClass.getStart());
-    endTimeText.setText(gymClass.getEnd());
-    daysText.setText(gymClass.getDays());
+    startTimeText.setText(gymClass.getStartTime());
+    endTimeText.setText(gymClass.getEndTime());
+    daysText.setText(gymClass.getDate());
     roomText.setText(gymClass.getRoom());
   }
 
