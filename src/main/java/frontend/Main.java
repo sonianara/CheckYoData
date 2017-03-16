@@ -46,7 +46,6 @@ public class Main extends Application {
     Image image = new Image("http://i67.tinypic.com/jb38ys.png");
     ImageView iv1 = new ImageView();
     iv1.setImage(image);
-//    name.setPadding(new Insets(0, 0, 50, 0));
 
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setContentText("Incorrect Username and Password");
@@ -57,7 +56,6 @@ public class Main extends Application {
     final BooleanProperty firstTime = new SimpleBooleanProperty(true);
     final TextField username = new TextField();
     username.setPromptText("Username");
-//    name.setStyle("" + "-fx-font-size: 30px;" + "-fx-font-family: Helvetica Neue;");
 
     final TextField password = new PasswordField();
     password.setPromptText("Password");
@@ -66,7 +64,6 @@ public class Main extends Application {
     VBox.setMargin(password, new Insets(0, 100, 10, 100));
     
     textfields.getChildren().addAll(iv1, username, password, loginBtn, newAccountBtn);
-//    bp.setTop(iv1);
     bp.setCenter(textfields);
   
     BooleanBinding bb = new BooleanBinding() {
@@ -135,7 +132,7 @@ public class Main extends Application {
     sp.getChildren().add(bp);
     sp.getChildren().add(textfields);
     sp.setStyle("-fx-background-color : #e1e1e5;");
-    primaryStage.setScene(new Scene(sp, 1100, 800));
+    primaryStage.setScene(new Scene(sp, 800, 800));
     primaryStage.show();
     
     // Initiate database connection
@@ -160,20 +157,25 @@ public class Main extends Application {
   
   public void homeScreen(Stage primaryStage) {
     BorderPane bp = new BorderPane();
-    HBox buttons = new HBox(10);
+    VBox buttons = new VBox(10);
     buttons.setAlignment(Pos.CENTER);
-    
+    Image image = new Image("http://i67.tinypic.com/jb38ys.png");
+    ImageView iv1 = new ImageView();
+    iv1.setImage(image);
     Button employeeMan = new Button("Employee Management");
     Button classMan = new Button("Class Management");
     Button inventoryMan = new Button("Inventory Management");
     Button memberMan = new Button("Member Management"); 
-
+    bp.setTop(iv1);
+    bp.setAlignment(iv1, Pos.TOP_CENTER);
+    bp.setMargin(iv1, new Insets(200, 0, -200, 0));
     employeeMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
     classMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
     inventoryMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
     memberMan.setStyle("" + "-fx-font-size: 20px;" + "-fx-font-family: Helvetica Neue;");
 
     buttons.getChildren().addAll(memberMan, employeeMan, classMan, inventoryMan);
+  
     
     employeeMan.setOnAction(new EventHandler<ActionEvent>() {
       @Override
@@ -242,7 +244,7 @@ public class Main extends Application {
     
     bp.setCenter(buttons);
     
-    primaryStage.setScene(new Scene(bp, 1100, 800));
+    primaryStage.setScene(new Scene(bp, 800, 800));
     primaryStage.show();
  
   }
