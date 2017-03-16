@@ -42,6 +42,7 @@ public class EditInventoryController {
     DatabaseCommunicator.getInstance();
     DatabaseCommunicator.replaceDatabase(updatedItem);
 
+    controller.getInventoryList(null);
     controller.populateInventory();
 
     Stage currentStage = (Stage) saveButton.getScene().getWindow();
@@ -52,6 +53,7 @@ public class EditInventoryController {
   public void deleteInventoryItem(ActionEvent event) {
     DatabaseCommunicator.deleteFromDatabase(inventoryItem, "'"+ inventoryItem.getName()+"'");
 
+    controller.getInventoryList(null);
     controller.populateInventory();
 
     Stage currentStage = (Stage) saveButton.getScene().getWindow();

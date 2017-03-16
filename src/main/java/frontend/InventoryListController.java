@@ -34,13 +34,11 @@ public class InventoryListController {
   }
 
   public void populateInventory() {
-	  System.out.println("Clearing");
     inventoryContainer.getChildren().clear();
 
     addLabelsToContainer();
 
     for (int i = 0; i < inventoryItems.size(); i++) {
-    	System.out.println(inventoryItems.get(i));
       addInventoryItemToContainer(inventoryItems.get(i));
     }
 
@@ -88,7 +86,6 @@ public class InventoryListController {
   @FXML
   public void addInventoryItemButtonClick(ActionEvent event) throws IOException {
     String fxmlFile = "NewInventoryForm.fxml";
-    System.out.println("HERE ADDING");
     Stage stage = new Stage();
     Pane myPane = null;
     FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -102,7 +99,6 @@ public class InventoryListController {
 
   @FXML
   public void searchButtonClick(ActionEvent event) throws IOException {
-    System.out.println("search button clicked");
     String fxmlFile = "SearchInventoryForm.fxml";
     Stage stage = new Stage();
     Pane myPane = null;
@@ -128,7 +124,6 @@ public class InventoryListController {
     List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(
         query);
     for (HashMap<String, Object> row : rows) {
-    	System.out.println("HEREERE");
       InventoryItem item = new InventoryItem();
       item.setName(row.get("name").toString());
       item.setCount(Integer.parseInt(row.get("count").toString()));

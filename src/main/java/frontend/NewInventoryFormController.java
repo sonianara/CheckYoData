@@ -33,6 +33,7 @@ public class NewInventoryFormController {
     DatabaseCommunicator.getInstance();
     DatabaseCommunicator.addToDatabase(newItem);
 
+    controller.getInventoryList(null);
     controller.populateInventory();
 
     // close the new item form
