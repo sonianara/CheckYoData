@@ -96,6 +96,15 @@ public class DatabaseCommunicator
 		Member member = new Member(firstName, lastName, email, phoneNumber, address, city, state, zipCode, memberType); 
 		return member; 
 	}
+
+	public static InventoryItem getInventoryItem(String name) {
+		HashMap<String, Object> row = queryDatabase("SELECT * FROM inventory WHERE name='" + name + "';").get(0);
+		String itemName = row.get("name").toString();
+		int itemCount = Integer.parseInt(row.get("count").toString());
+
+		InventoryItem inventoryItem = new InventoryItem(itemName, itemCount);
+		return inventoryItem;
+	}
 	/**
 	 * Method to query the database for some information 
 	 * Note the keys from the returned HashMaps are the table column names

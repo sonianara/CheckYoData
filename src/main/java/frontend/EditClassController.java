@@ -47,7 +47,7 @@ public class EditClassController {
 
       // update class list view
       controller.populateClasses();
-      
+
       // close the new class form
       Stage currentStage = (Stage) saveButton.getScene().getWindow();
       currentStage.close();
