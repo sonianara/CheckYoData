@@ -35,7 +35,6 @@ public class ClassRegistrationByMemberController {
 		for (HashMap<String, Object> row : rows) {
 			dates.add(row.get("date").toString()); 
 		}
-		System.out.println(dates.toString());
 		dateBox.setItems(FXCollections.observableArrayList(dates));
 	}
 	
@@ -89,7 +88,6 @@ public class ClassRegistrationByMemberController {
 	private GymClass getGymClass() {
 		String query = "SELECT classID FROM classes WHERE date='" + dateBox.getValue() + 
 				"' AND name='" + classNameBox.getValue() + "' AND startTime='" + timeBox.getValue() + "';"; 
-		System.out.println(query);
 		List<HashMap<String, Object>> classList = DatabaseCommunicator.queryDatabase(query); 
 		String classID = classList.get(0).get("classID").toString(); 
 		GymClass gymClass = DatabaseCommunicator.getGymClass(classID); 

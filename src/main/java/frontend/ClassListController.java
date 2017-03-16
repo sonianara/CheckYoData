@@ -42,7 +42,6 @@ public class ClassListController {
    * Method to populate the class list with database table
    */
   public void populateClasses() {
-      System.out.println("hello");
       classContainer.getChildren().clear();
 
       addLabelsToContainer(); 
@@ -142,7 +141,6 @@ public class ClassListController {
    */
   @FXML
   public void searchButtonClick(ActionEvent event) throws IOException {
-    System.out.println("search button clicked");
     String fxmlFile = "SearchClassForm.fxml"; 
     Stage stage = new Stage(); 
     Pane myPane = null; 
@@ -168,8 +166,6 @@ public class ClassListController {
           query += " WHERE " + filter;
       query += ";"; 
 
-      System.out.println(query);
-      
       // populate class list from back end
       List<HashMap<String, Object>> rows = DatabaseCommunicator.queryDatabase(query);
       for (HashMap<String, Object> row : rows) {
