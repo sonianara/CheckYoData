@@ -2,16 +2,20 @@ package frontend;
 
 import java.io.IOException;
 
+import javax.swing.GroupLayout.Alignment;
+
 import backend.DatabaseCommunicator;
 import backend.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.Pane; 
-import javafx.scene.control.Button; 
-import javafx.scene.control.Label; 
-import javafx.scene.Parent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -29,6 +33,7 @@ public class MemberEntryController {
 	@FXML private Label phoneNumber; 
 	@FXML private Label memberType; 
 	@FXML private Button editButton; 
+	@FXML private Button reservationButton; 
 	
 	/**
 	 * Method to inform the EditMemberController which member it is editing
@@ -36,7 +41,7 @@ public class MemberEntryController {
 	 */
 	@FXML
     private void editAction(ActionEvent event) throws IOException {	
-		Stage stage = new Stage();
+Stage stage = new Stage();
     	Pane myPane = null; 
 
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditMemberForm.fxml"));     
@@ -50,6 +55,28 @@ public class MemberEntryController {
 
 		
 		editMemberController.populateFields();
+	
+		Scene scene = new Scene(myPane); 
+    	stage.setScene(scene);    
+    	stage.show();   
+	}
+	
+	@FXML 
+	public void reserveAction(ActionEvent event) throws IOException {
+		Stage stage = new Stage();
+    	Pane myPane = null; 
+
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ClassRegistrationByMemberView.fxml"));     
+		myPane = (Pane)fxmlLoader.load();
+
+		// Sets values so the ResourceEntryController knows which course it contains.
+		ClassRegistrationByMemberController registrationController = fxmlLoader.<ClassRegistrationByMemberController>getController();
+		TextField memberName = (TextField) myPane.lookup("#memberName");
+		memberName.setText(member.getFirstName() + " " + member.getLastName());
+		memberName.setAlignment(Pos.CENTER);
+		memberName.setDisable(true); 
+		DatabaseCommunicator.getInstance(); 
+		registrationController.setMember(DatabaseCommunicator.getMember(phoneNumber.getText())); 
 	
 		Scene scene = new Scene(myPane); 
     	stage.setScene(scene);    
