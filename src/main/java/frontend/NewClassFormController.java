@@ -13,7 +13,9 @@ public class NewClassFormController {
   @FXML private TextField classNameText; 
   @FXML private TextField startTimeText; 
   @FXML private TextField endTimeText; 
-  @FXML private TextField daysText; 
+  @FXML private TextField yearText;
+  @FXML private TextField monthText;
+  @FXML private TextField dayText;
   @FXML private TextField roomText; 
   @FXML private TextField capacityText;
   @FXML private Button submitButton; 
@@ -26,21 +28,21 @@ public class NewClassFormController {
     String className = classNameText.getText().toString(); 
     String startTime = startTimeText.getText().toString();
     String endTime = endTimeText.getText().toString();
-    String days = daysText.getText().toString();
+    String date = yearText.getText() + "-" + monthText.getText() + "-" + dayText.getText();
     String room = roomText.getText().toString(); 
     int capacity = Integer.parseInt(capacityText.getText());
 
-    GymClass newClass = new GymClass(classID, className, startTime, endTime, days, room, capacity, 0); 
+    GymClass newClass = new GymClass(classID, className, startTime, endTime, date, room, capacity, 0); 
       
-      DatabaseCommunicator.getInstance(); 
-      DatabaseCommunicator.addToDatabase(newClass);
-      
-      // update the member list view
-      controller.populateClasses();
-      
-      // close the new class form
-      Stage currentStage = (Stage) submitButton.getScene().getWindow();
-      currentStage.close();
+    DatabaseCommunicator.getInstance(); 
+    DatabaseCommunicator.addToDatabase(newClass);
+    
+    // update the member list view
+    controller.initialize();
+    
+    // close the new class form
+    Stage currentStage = (Stage) submitButton.getScene().getWindow();
+    currentStage.close();
   }
   
 

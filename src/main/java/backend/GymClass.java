@@ -39,7 +39,7 @@ public class GymClass implements DatabaseObject {
   @Override
   public String getValues() {
     return "'" + this.classID + "', '" + this.name + "', '" + this.startTime + "', '"
-          + this.endTime + "', '" + this.date + "', '" + this.room + ", " + this.capacity + ", " + this.reserved;
+          + this.endTime + "', '" + this.date + "', '" + this.room + "', " + this.capacity + ", " + this.reserved;
   }
 
   @Override

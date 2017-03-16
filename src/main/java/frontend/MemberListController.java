@@ -10,7 +10,6 @@ import backend.Member;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -102,7 +101,7 @@ public class MemberListController {
 		memberController.setMember(member);
 		memberController.setMemberController(this);
 		
-	// set the values for the pane
+		// set the values for the pane
 		memberContainer.getChildren().add(newPane);
 		Label firstName = (Label) newPane.lookup("#firstName");
 		Label lastName = (Label) newPane.lookup("#lastName");

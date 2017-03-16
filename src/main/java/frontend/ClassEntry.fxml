@@ -9,14 +9,15 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.ClassEntryController">
    <children>
-      <Label fx:id="classID" layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="131.0" text="CLASS ID" />
-      <Label fx:id="className" layoutX="103.0" layoutY="11.0" prefHeight="17.0" prefWidth="131.0" text="CLASS NAME" />
-      <Label fx:id="startTime" layoutX="220.0" layoutY="11.0" text="START TIME" />
-      <Label fx:id="date" layoutX="431.0" layoutY="11.0" prefHeight="17.0" prefWidth="93.0" text="DATE" />
-      <Button fx:id="editButton" layoutX="778.0" layoutY="7.0" mnemonicParsing="false" onAction="#editAction" text="Edit" />
-      <Label fx:id="endTime" layoutX="331.0" layoutY="11.0" text="END TIME" />
-      <Label fx:id="room" layoutX="505.0" layoutY="11.0" prefHeight="17.0" prefWidth="55.0" text="ROOM" />
-      <Label fx:id="capacity" layoutX="584.0" layoutY="11.0" prefHeight="17.0" prefWidth="55.0" text="CAPACITY" />
-      <Label fx:id="reserved" layoutX="677.0" layoutY="11.0" prefHeight="17.0" prefWidth="55.0" text="RESERVED" />
+      <Label fx:id="classID" layoutX="9.0" layoutY="11.0" prefHeight="17.0" prefWidth="131.0" text="CLASS ID" />
+      <Label fx:id="className" layoutX="80.0" layoutY="11.0" prefHeight="17.0" prefWidth="131.0" text="CLASS NAME" />
+      <Label fx:id="startTime" layoutX="184.0" layoutY="11.0" text="START TIME" />
+      <Label fx:id="date" layoutX="365.0" layoutY="11.0" prefHeight="17.0" prefWidth="93.0" text="DATE" />
+      <Button fx:id="editButton" layoutX="680.0" layoutY="7.0" mnemonicParsing="false" onAction="#editAction" text="Edit" />
+      <Label fx:id="endTime" layoutX="279.0" layoutY="11.0" text="END TIME" />
+      <Label fx:id="room" layoutX="448.0" layoutY="11.0" prefHeight="17.0" prefWidth="55.0" text="ROOM" />
+      <Label fx:id="capacity" layoutX="521.0" layoutY="11.0" prefHeight="17.0" prefWidth="55.0" text="CAPACITY" />
+      <Label fx:id="reserved" layoutX="600.0" layoutY="11.0" prefHeight="17.0" prefWidth="55.0" text="RESERVED" />
+      <Button fx:id="addReservationButton" layoutX="727.0" layoutY="7.0" mnemonicParsing="false" onAction="#reserveAction" text="Add Reservation" />
    </children>
 </Pane>

@@ -13,7 +13,9 @@ public class EditClassController {
   @FXML private TextField classNameText; 
   @FXML private TextField startTimeText; 
   @FXML private TextField endTimeText; 
-  @FXML private TextField daysText; 
+  @FXML private TextField monthText;
+  @FXML private TextField dayText;
+  @FXML private TextField yearText;
   @FXML private TextField roomText; 
   @FXML private TextField capacityText;
   @FXML private Button saveButton; 
@@ -38,17 +40,17 @@ public class EditClassController {
       String className = classNameText.getText(); 
       String startTime = startTimeText.getText();
       String endTime = endTimeText.getText();
-      String days = daysText.getText();
+      String date = yearText.getText() + "-" + monthText.getText() + "-" + dayText.getText();
       String room = roomText.getText();
       int capacity = Integer.parseInt(capacityText.getText());
            
-      GymClass updatedClass = new GymClass(classID, className, startTime, endTime, days, room, capacity, 0); 
+      GymClass updatedClass = new GymClass(classID, className, startTime, endTime, date, room, capacity, gymClass.getReserved()); 
 
       DatabaseCommunicator.getInstance(); 
       DatabaseCommunicator.replaceDatabase(updatedClass);
 
       // update class list view
-      controller.populateClasses();
+      controller.initialize();
 
       // close the new class form
       Stage currentStage = (Stage) saveButton.getScene().getWindow();
@@ -73,8 +75,13 @@ public class EditClassController {
     classNameText.setText(gymClass.getName());
     startTimeText.setText(gymClass.getStartTime());
     endTimeText.setText(gymClass.getEndTime());
-    daysText.setText(gymClass.getDate());
+    
+    String[] splitDate = gymClass.getDate().split("-"); 
+    yearText.setText(splitDate[0]);
+    monthText.setText(splitDate[1]);
+    dayText.setText(splitDate[2]);
     roomText.setText(gymClass.getRoom());
+    capacityText.setText(Integer.toString(gymClass.getCapacity()));
   }
 
 }
