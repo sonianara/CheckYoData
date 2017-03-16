@@ -29,7 +29,7 @@ public class SearchClassFormController {
           filter = null;
       
       // update the member list view
-      controller.getClassList(filter); 
+      controller.getClassList(filter, "name asc"); 
       controller.populateClasses();
 
       // close the new member form
