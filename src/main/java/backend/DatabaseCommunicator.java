@@ -75,7 +75,7 @@ public class DatabaseCommunicator
 	  String name = row.get("name").toString();
 	  String startTime = row.get("startTime").toString();
 	  String endTime = row.get("endTime").toString();
-	  String date = row.get("days").toString();
+	  String date = row.get("date").toString();
 	  String room = row.get("room").toString();
 	  int capacity = (int) row.get("capacity");
 	  int reserved = (int) row.get("reserved");
